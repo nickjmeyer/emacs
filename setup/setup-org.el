@@ -94,3 +94,5 @@
 (setq org-babel-default-header-args
       (cons '(:results . "output")
             (assq-delete-all :results org-babel-default-header-args)))
+
+(provide 'setup-org)
