@@ -1,6 +1,9 @@
+(setq default-frame-background-color "#404040")
+(setq default-frame-foreground-color "#eedc82")
+
 (setq default-frame-alist
-      '((background-color . "#404040") ;; gray25
-        (foreground-color . "#eedc82") ;; LightGoldenrod2
+      '((background-color . default-frame-background-color)
+        (foreground-color . default-frame-foreground-color)
         )
       )
 
