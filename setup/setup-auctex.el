@@ -26,6 +26,4 @@
 (setq TeX-parse-self t)
 (setq TeX-PDF-mode t)
 
-(message "Loading auctex")
-
 (provide 'setup-auctex)

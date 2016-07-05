@@ -8,6 +8,4 @@
 (add-hook 'ess-mode-hook (lambda () (setq ess-arg-function-offset nil)))
 (add-hook 'ess-mode-hook (lambda () (setq ess-indent-level 2) ) )
 
-(message "Loading ess-site")
-
 (provide 'setup-ess)
