@@ -8,17 +8,6 @@
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
-;; get rid of mouse while typing
-(setq mouse-avoidance-mode 'banish)
-
-;; cleanup interface
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(blink-cursor-mode)
-(setq column-number-mode t)
-
-
 ;; Emacs backup control
 (setq backup-by-copying t
       backup-directory-alist '(("." . "~/.emacsBkups"))
@@ -197,3 +186,14 @@
 ;; customization
 (setq custom-file "~/.emacs.d/customization.el")
 (load custom-file)
+
+
+;; get rid of mouse while typing
+(setq mouse-avoidance-mode 'banish)
+
+;; cleanup interface
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(blink-cursor-mode)
+(setq column-number-mode t)
