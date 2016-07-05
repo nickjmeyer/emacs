@@ -3,12 +3,14 @@
 (setq eshell-prompt-function
       (lambda()
         (concat
-         (propertize (system-name) 'face `(:foreground "green"))
-         (propertize " @ " 'face `(:foreground "gray"))
+         (propertize (system-name) 'face `(:foreground "#00ee00"))
+         (propertize " @ " 'face `(:foreground "#dedede"))
          (propertize (replace-regexp-in-string "^.*/" "" (eshell/pwd))
-                     'face `(:foreground "blue"))
-         (propertize " $ " `face `(:foreground "gray"))
+                     'face `(:foreground "#1e90ff"))
+         (propertize " $" `face `(:foreground "#dedede"))
+         (propertize " " `face `(:foreground default-frame-foreground-color))
          )))
+
 
 (defun eshell-maybe-bol ()
   (interactive)
