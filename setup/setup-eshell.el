@@ -1,3 +1,6 @@
+(require 'ansi-color)
+(require 'eshell)
+
 (setq shell-file-name "bash")
 
 (setq eshell-prompt-function
@@ -20,5 +23,11 @@
         (beginning-of-line))))
 (add-hook 'eshell-mode-hook
           '(lambda () (define-key eshell-mode-map "\C-a" 'eshell-maybe-bol)))
+
+
+(defun eshell-handle-ansi-color ()
+  (ansi-color-apply-on-region eshell-last-output-start
+                              eshell-last-output-end))
+(add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 
 (provide 'setup-eshell)
