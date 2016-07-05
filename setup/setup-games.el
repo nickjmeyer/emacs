@@ -1,0 +1,16 @@
+(setq tetris-score-file "~/Dropbox/Emacs/tetris-scores")
+(setq snake-score-file "~/Dropbox/Emacs/snake-scores")
+(if (file-writable-p "~/Dropbox")
+    (progn
+      (unless (file-writable-p "~/Dropbox/Emacs")
+        (make-directory "~/Dropbox/Emacs"))
+      (setq tetris-score-file "~/Dropbox/Emacs/tetris-scores")
+      (setq snake-score-file "~/Dropbox/Emacs/snake-scores")
+      )
+  (unless (file-writeable-p "~/Emacs")
+    (make-directory "~/Emacs"))
+  (setq tetris-score-file "~/Emacs/tetris-scores")
+  (setq snake-score-file "~/Emacs/snake-scores")
+  )
+
+(provide 'setup-games)

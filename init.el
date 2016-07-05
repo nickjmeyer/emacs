@@ -2,21 +2,48 @@
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+(package-refresh-contents)
+
 
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
+;; get rid of mouse while typing
+(setq mouse-avoidance-mode 'banish)
+
+;; cleanup interface
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(blink-cursor-mode)
+(setq column-number-mode t)
+
+
+;; Emacs backup control
+(setq backup-by-copying t
+      backup-directory-alist '(("." . "~/.emacsBkups"))
+      delete-old-versions t
+      kept-new-versions 5
+      version-control t)
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(defconst demo-packages
-  '(anzu
+(defconst necessary-packages
+  '(auctex
+    anzu
     company
     duplicate-thing
+    ess
     ggtags
     helm
     helm-gtags
     helm-projectile
     helm-swoop
+    julia-mode
+    magit
+    make-mode
+    markdown-mode
     ;; function-args
     clean-aindent-mode
     comment-dwim-2
@@ -35,7 +62,7 @@
   (interactive)
   (unless package-archive-contents
     (package-refresh-contents))
-  (dolist (package demo-packages)
+  (dolist (package necessary-packages)
     (unless (package-installed-p package)
       (package-install package))))
 
@@ -45,13 +72,26 @@
 ;; you can change to any prefix key of your choice
 (setq helm-gtags-prefix-key "\C-cg")
 
-(add-to-list 'load-path "~/.emacs.d/custom")
+(add-to-list 'load-path "~/.emacs.d/setup")
+
+(require 'setup-auctex)
+(require 'setup-dired)
+(require 'setup-eshell)
+(require 'setup-ess)
+(require 'setup-faces)
+(require 'setup-julia)
+(require 'setup-magit)
+(require 'setup-make)
+(require 'setup-markdown)
+(require 'setup-org)
+(require 'setup-games) ;; emacs games (e.g., snake and tetris)
+(require 'setup-whitespace)
 
 (require 'setup-helm)
 (require 'setup-helm-gtags)
-;; (require 'setup-ggtags)
 (require 'setup-cedet)
 (require 'setup-editing)
+
 
 (windmove-default-keybindings)
 
@@ -96,14 +136,8 @@
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
-;; show unncessary whitespace that can mess up your diff
-(add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))
-
 ;; use space to indent by default
-(setq-default indent-tabs-mode nil)
-
-;; set appearance of a tab that is represented by 4 spaces
-(setq-default tab-width 4)
+;; (setq-default indent-tabs-mode nil)
 
 ;; Compilation
 (global-set-key (kbd "<f5>") (lambda ()
@@ -158,3 +192,8 @@
 
 ;; Package zygospore
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
+
+
+;; customization
+(setq custom-file "~/.emacs.d/customization.el")
+(load custom-file)
