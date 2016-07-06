@@ -24,7 +24,6 @@
     company
     duplicate-thing
     ess
-    ggtags
     helm
     helm-gtags
     helm-projectile
