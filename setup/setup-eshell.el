@@ -11,7 +11,7 @@
          (propertize (replace-regexp-in-string "^.*/" "" (eshell/pwd))
                      'face `(:foreground "#1e90ff"))
          (propertize " $" `face `(:foreground "#dedede"))
-         (propertize " " `face `(:foreground default-frame-foreground-color))
+         (propertize " " `face `(:foreground "#eedc82"))
          )))
 
 
