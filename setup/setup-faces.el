@@ -1,9 +1,6 @@
-(setq default-frame-background-color "#404040")
-(setq default-frame-foreground-color "#eedc82")
-
 (setq default-frame-alist
-      '((background-color . default-frame-background-color)
-        (foreground-color . default-frame-foreground-color)
+      '((background-color . "#404040")
+        (foreground-color . "#eedc82")
         )
       )
 
