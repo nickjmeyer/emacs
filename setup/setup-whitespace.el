@@ -1,7 +1,7 @@
 (require 'whitespace)
 
 ;; show unncessary whitespace that can mess up your diff
-(add-hook 'prog-mode-hook (lambda () (whitspace-mode 1)))
+(add-hook 'prog-mode-hook (lambda () (whitespace-mode 1)))
 
 ;; show whitespace in diff-mode
 (add-hook 'diff-mode-hook (lambda ()
