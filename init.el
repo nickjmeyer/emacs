@@ -22,6 +22,7 @@
   '(auctex
     anzu
     company
+    company-jedi
     duplicate-thing
     ess
     helm
@@ -67,6 +68,7 @@
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-faces)
+(require 'setup-jedi)
 (require 'setup-julia)
 (require 'setup-magit)
 (require 'setup-make)
