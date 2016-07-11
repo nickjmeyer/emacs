@@ -1,6 +1,6 @@
 (require 'company-jedi)
 
-(jedi:install-server)
+(add-hook 'python-mode-hook 'jedi:setup)
 
 (add-hook 'python-mode-hook '(lambda()
                                (add-to-list 'company-backends 'company-jedi)
