@@ -33,6 +33,7 @@
     magit
     make-mode
     markdown-mode
+    protobuf-mode
     ;; function-args
     clean-aindent-mode
     comment-dwim-2
@@ -74,6 +75,7 @@
 (require 'setup-make)
 (require 'setup-markdown)
 (require 'setup-org)
+(require 'setup-protobuf)
 (require 'setup-games) ;; emacs games (e.g., snake and tetris)
 (require 'setup-whitespace)
 
