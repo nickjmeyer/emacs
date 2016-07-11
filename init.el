@@ -23,6 +23,7 @@
     anzu
     company
     company-jedi
+    company-quickhelp
     duplicate-thing
     ess
     helm
@@ -93,6 +94,7 @@
 
 ;; company
 (require 'company)
+(company-quickhelp-mode 1)
 (add-hook 'after-init-hook 'global-company-mode)
 (delete 'company-semantic company-backends)
 (define-key c-mode-map  [(tab)] 'company-complete)
