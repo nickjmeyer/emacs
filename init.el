@@ -131,8 +131,13 @@
 ;; “python”: What Python developers use for extension modules
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
+(defconst my-cc-style
+  '("linux"
+    (c-offsets-alist . ((innamespace . [0])))))
+(c-add-style "my-cc-style" my-cc-style)
+
 (setq
- c-default-style "linux" ;; set style to "linux"
+ c-default-style "my-cc-style" ;;
  )
 
 (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
