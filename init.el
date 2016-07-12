@@ -96,7 +96,9 @@
 
 ;; company
 (require 'company)
-(company-quickhelp-mode 1)
+(if (display-graphic-p)
+    (company-quickhelp-mode 1)
+  (company-quickhelp-mode 0))
 (add-hook 'after-init-hook 'global-company-mode)
 (delete 'company-semantic company-backends)
 (define-key c-mode-map  [(tab)] 'company-complete)
