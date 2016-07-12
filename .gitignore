@@ -44,3 +44,5 @@ site-lisp/package/
 /projectile-bookmarks.eld
 ede-projects.el
 .python-environments/
+abbrev_defs
+semanticdb/
