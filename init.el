@@ -30,6 +30,7 @@
     helm-gtags
     helm-projectile
     helm-swoop
+    jedi
     julia-mode
     magit
     make-mode
@@ -101,10 +102,10 @@
   (company-quickhelp-mode 0))
 (add-hook 'after-init-hook 'global-company-mode)
 (delete 'company-semantic company-backends)
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
-(define-key c-mode-map  (kbd "TAB") 'company-complete)
-(define-key c++-mode-map  (kbd "TAB") 'company-complete)
+(define-key c-mode-map  [(control tab)] 'company-complete)
+(define-key c++-mode-map  [(control tab)] 'company-complete)
+(define-key c-mode-map  (kbd "C-TAB") 'company-complete)
+(define-key c++-mode-map  (kbd "C-TAB") 'company-complete)
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
