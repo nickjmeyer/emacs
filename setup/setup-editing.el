@@ -1,17 +1,16 @@
 ;; GROUP: Editing -> Editing Basics
 
-(setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
-      mark-ring-max 5000                ; increase kill ring to contains 5000 entries
-      mode-require-final-newline t      ; add a newline to end of file
-      tab-width 2                       ; default to 2 visible spaces to display a tab
-      )
+(setq global-mark-ring-max 5000) ; increase mark ring to contains 5000 entries
+(setq mark-ring-max 5000) ; increase kill ring to contains 5000 entries
+(setq mode-require-final-newline t)      ; add a newline to end of file
+(setq-default tab-width 2 ) ; default to 2 visible spaces to display a tab
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(setq-default indent-tabs-mode nil)
+;; (setq-default indent-tabs-mode nil)
 (delete-selection-mode)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
