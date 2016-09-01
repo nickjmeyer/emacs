@@ -134,7 +134,9 @@
 ;; “user”: When you want to define your own style
 (defconst my-cc-style
   '("linux"
-    (c-offsets-alist . ((innamespace . [0])))))
+    (c-offsets-alist . ((innamespace . [0])))
+    (c-basic-offset . 2)
+    ))
 (c-add-style "my-cc-style" my-cc-style)
 
 (setq
