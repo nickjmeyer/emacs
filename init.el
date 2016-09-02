@@ -15,6 +15,8 @@
       kept-new-versions 5
       version-control t)
 
+(setq abbrev-file-name  "~/.emacs.d/abbrev_defs")
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
