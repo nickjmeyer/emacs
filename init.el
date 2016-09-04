@@ -215,3 +215,9 @@
 (tool-bar-mode -1)
 (blink-cursor-mode)
 (setq column-number-mode t)
+
+
+;; customization for current machine
+(if (file-exists-p "~/.emacs.d/machineCustom.el")
+    (load "~/.emacs.d/machineCustom.el")
+  )
