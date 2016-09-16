@@ -26,6 +26,7 @@
 (defconst necessary-packages
   '(auctex
     anzu
+    cmake-mode
     company
     company-jedi
     company-quickhelp
