@@ -32,6 +32,7 @@
     company-quickhelp
     duplicate-thing
     ess
+    groovy-mode
     helm
     helm-gtags
     helm-projectile
