@@ -148,6 +148,7 @@
                         (arglist-cont . c-basic-offset)
                         (arglist-cont-nonempty . c-basic-offset)))
     ))
+(setq c-block-comment-prefix "* ")
 (c-add-style "my-cc-style" my-cc-style)
 
 (setq
