@@ -1,6 +1,6 @@
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 (package-refresh-contents)
 
@@ -154,13 +154,14 @@
 
 (setq c-default-style "my-cc-style")
 
-(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
+;; automatically indent when press RET
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
 ;; use space to indent by default
-;; (setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Compilation
 (global-set-key (kbd "<f5>") (lambda ()
@@ -176,22 +177,6 @@
  ;; Non-nil means display source file containing the main routine at startup
  gdb-show-main t
  )
-
-;; Package: clean-aindent-mode
-(require 'clean-aindent-mode)
-(add-hook 'prog-mode-hook 'clean-aindent-mode)
-
-;; Package: dtrt-indent
-(require 'dtrt-indent)
-(dtrt-indent-mode 1)
-
-;; Package: ws-butler
-(require 'ws-butler)
-(add-hook 'prog-mode-hook 'ws-butler-mode)
-
-;; Package: yasnippet
-(require 'yasnippet)
-(yas-global-mode 1)
 
 ;; Package: projejctile
 (require 'projectile)
