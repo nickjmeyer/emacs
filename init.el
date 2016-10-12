@@ -142,19 +142,17 @@
 ;; “user”: When you want to define your own style
 (defconst my-cc-style
   '("linux"
-    (c-basic-offset . 2)
+    (c-basic-offset . 4)
     (c-offsets-alist . ((innamespace . [0])
-                        (arglist-intro . c-basic-offset)
-                        (arglist-close . c-basic-offset)
-                        (arglist-cont . c-basic-offset)
-                        (arglist-cont-nonempty . c-basic-offset)))
+                        (arglist-intro . ++)
+                        (arglist-close . ++)
+                        (arglist-cont . 0)
+                        (arglist-cont-nonempty . ++)))
+    (c-block-comment-prefix . "* ")
     ))
-(setq c-block-comment-prefix "* ")
 (c-add-style "my-cc-style" my-cc-style)
 
-(setq
- c-default-style "my-cc-style" ;;
- )
+(setq c-default-style "my-cc-style")
 
 (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 
