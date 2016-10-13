@@ -208,6 +208,8 @@
 (setq column-number-mode t)
 
 
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
     (load "~/.emacs.d/machineCustom.el")
