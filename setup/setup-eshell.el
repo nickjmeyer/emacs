@@ -3,10 +3,18 @@
 
 (setq shell-file-name "bash")
 
+(defun eshell-hostname ()
+  (if (string-match "^/[a-z]+:\\([a-z0-9]+\\):/.*" (eshell/pwd))
+      (match-string 1 (eshell/pwd))
+    (system-name)
+    )
+  )
+
+
 (setq eshell-prompt-function
       (lambda()
         (concat
-         (propertize (system-name) 'face `(:foreground "#00ee00"))
+         (propertize (eshell-hostname) 'face `(:foreground "#00ee00"))
          (propertize " @ " 'face `(:foreground "#dedede"))
          (propertize (replace-regexp-in-string "^.*/" "" (eshell/pwd))
                      'face `(:foreground "#1e90ff"))
