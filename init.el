@@ -16,9 +16,9 @@
       version-control t)
 
 ;; abbrev mode
-;; (setq abbrev-file-name  "~/.emacs.d/abbrev_defs")
-;; (setq save-abbrevs t)
-;; (setq-default abbrev-mode t)
+(setq abbrev-file-name  "~/.emacs.d/abbrev_defs")
+(setq save-abbrevs t)
+(setq-default abbrev-mode t)
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
