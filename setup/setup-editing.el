@@ -281,10 +281,10 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-o") 'open-line)
 
 ;; java
-(add-hook 'java-mode-hook (lambda ()
-														(setq c-basic-offset 2
-																	c-block-comment-prefix "* "
-																	tab-width 2
-																	indent-tabs-mode t)))
+;; (add-hook 'java-mode-hook (lambda ()
+;; 														(setq c-basic-offset 2
+;; 																	c-block-comment-prefix "* "
+;; 																	tab-width 2
+;; 																	indent-tabs-mode t)))
 
 (provide 'setup-editing)
