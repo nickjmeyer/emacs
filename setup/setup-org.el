@@ -1,5 +1,6 @@
 (require 'org)
 (require 'ox-html)
+(require 'ob-sh)
 
 (setq initial-major-mode 'org-mode)
 (setq initial-scratch-message "# This is a scratch Org buffer")
@@ -65,6 +66,7 @@
    (python . t)
    (julia . t)
    (latex . t)
+   (sh . t)
    ))
 
 (setq org-publish-project-alist
