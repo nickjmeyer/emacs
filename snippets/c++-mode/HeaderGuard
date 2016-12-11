@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# key: guard
 # name: HeaderGuard
+# key: guard
 # --
 #ifndef $1
 #define $1
