@@ -214,3 +214,4 @@
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
     (load "~/.emacs.d/machineCustom.el")
   )
+(put 'downcase-region 'disabled nil)
