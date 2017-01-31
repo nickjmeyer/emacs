@@ -32,6 +32,7 @@
     company-quickhelp
     duplicate-thing
     ess
+    exec-path-from-shell
     groovy-mode
     helm
     helm-gtags
@@ -206,6 +207,9 @@
 (tool-bar-mode -1)
 (blink-cursor-mode)
 (setq column-number-mode t)
+
+;; get path from shell environment
+(exec-path-from-shell-initialize)
 
 
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
