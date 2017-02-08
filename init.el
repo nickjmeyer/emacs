@@ -206,6 +206,9 @@
 ;; get rid of mouse while typing
 (setq mouse-avoidance-mode 'banish)
 
+;; turn off system bell
+(setq ring-bell-function 'ignore)
+
 ;; cleanup interface
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
