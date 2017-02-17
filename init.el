@@ -43,6 +43,7 @@
     magit
     make-mode
     markdown-mode
+    modern-c++-font-lock-mode
     protobuf-mode
     ;; function-args
     clean-aindent-mode
@@ -114,6 +115,8 @@
 (define-key c++-mode-map  [(control tab)] 'company-complete)
 (define-key c-mode-map  (kbd "C-TAB") 'company-complete)
 (define-key c++-mode-map  (kbd "C-TAB") 'company-complete)
+(require 'modern-cpp-font-lock)
+(modern-c++-font-lock-global-mode t)
 ;; (with-eval-after-load 'company
 ;;   (define-key company-active-map (kbd "M-n") nil)
 ;;   (define-key company-active-map (kbd "M-p") nil)
