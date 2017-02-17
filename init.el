@@ -43,7 +43,7 @@
     magit
     make-mode
     markdown-mode
-    modern-c++-font-lock-mode
+    modern-cpp-font-lock
     protobuf-mode
     ;; function-args
     clean-aindent-mode
