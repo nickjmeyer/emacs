@@ -1,5 +1,7 @@
 machineCustom.el
 
+irony/
+
 projectile.cache
 
 /url/cache
