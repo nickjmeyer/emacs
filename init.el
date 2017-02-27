@@ -4,7 +4,6 @@
 (package-initialize)
 (package-refresh-contents)
 
-
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
@@ -26,18 +25,23 @@
 (defconst necessary-packages
   '(auctex
     anzu
-    cmake-mode
+    cl
     company
+    company-irony
+    company-irony-c-headers
     company-jedi
     company-quickhelp
+    ;; company-rtags
     duplicate-thing
     ess
     exec-path-from-shell
+    flycheck-irony
     groovy-mode
     helm
     helm-gtags
     helm-projectile
     helm-swoop
+    irony
     jedi
     julia-mode
     magit
@@ -80,6 +84,7 @@
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-faces)
+(require 'setup-irony)
 (require 'setup-jedi)
 (require 'setup-julia)
 (require 'setup-magit)
@@ -96,7 +101,7 @@
 (require 'setup-editing)
 
 
-(windmove-default-keybindings)
+;; (windmove-default-keybindings)
 
 ;; function-args
 ;; (require 'function-args)
@@ -105,18 +110,20 @@
 ;; (define-key c++-mode-map  [(tab)] 'company-complete)
 
 ;; company
-(require 'company)
-(if (display-graphic-p)
-    (company-quickhelp-mode 1)
-  (company-quickhelp-mode 0))
-(add-hook 'after-init-hook 'global-company-mode)
-(delete 'company-semantic company-backends)
-(define-key c-mode-map  [(control tab)] 'company-complete)
-(define-key c++-mode-map  [(control tab)] 'company-complete)
-(define-key c-mode-map  (kbd "C-TAB") 'company-complete)
-(define-key c++-mode-map  (kbd "C-TAB") 'company-complete)
+;; (require 'company)
+;; (if (display-graphic-p)
+;;     (company-quickhelp-mode 1)
+;;   (company-quickhelp-mode 0))
+;; (add-hook 'after-init-hook 'global-company-mode)
+;; (delete 'company-semantic company-backends)
+;; (define-key c-mode-map  [(control tab)] 'company-complete)
+;; (define-key c++-mode-map  [(control tab)] 'company-complete)
+;; (define-key c-mode-map  (kbd "C-TAB") 'company-complete)
+;; (define-key c++-mode-map  (kbd "C-TAB") 'company-complete)
+
 (require 'modern-cpp-font-lock)
 (modern-c++-font-lock-global-mode t)
+
 ;; (with-eval-after-load 'company
 ;;   (define-key company-active-map (kbd "M-n") nil)
 ;;   (define-key company-active-map (kbd "M-p") nil)
