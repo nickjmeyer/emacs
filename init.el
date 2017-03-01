@@ -4,6 +4,13 @@
 (package-initialize)
 (package-refresh-contents)
 
+;; get path from shell environment
+(exec-path-from-shell-initialize)
+
+;; fix for max osx
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
@@ -26,18 +33,19 @@
   '(auctex
     anzu
     cl
+    cmake-ide
     company
     company-irony
     company-irony-c-headers
     company-jedi
     company-quickhelp
-    ;; company-rtags
     duplicate-thing
     ess
     exec-path-from-shell
     flycheck-irony
     groovy-mode
     helm
+    helm-company
     helm-gtags
     helm-projectile
     helm-swoop
@@ -50,6 +58,7 @@
     modern-cpp-font-lock
     protobuf-mode
     ;; function-args
+    rtags
     clean-aindent-mode
     comment-dwim-2
     dtrt-indent
@@ -84,6 +93,7 @@
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-faces)
+(require 'setup-company)
 (require 'setup-irony)
 (require 'setup-jedi)
 (require 'setup-julia)
@@ -226,8 +236,19 @@
 (blink-cursor-mode)
 (setq column-number-mode t)
 
-;; get path from shell environment
-(exec-path-from-shell-initialize)
+;; setup cmake ide
+(cmake-ide-setup)
+(defun cmake-ide/c-c++-hook ()
+  (with-eval-after-load 'projectile
+    (setq cmake-ide-project-dir (projectile-project-root))
+    (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build"))))
+
+(add-hook 'c-mode-hook (lambda ()
+                         (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
+(add-hook 'c++-mode-hook (lambda ()
+                           (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
+
+(add-hook 'c++-mode-hook #'cmake-ide/c-c++-hook)
 
 
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
