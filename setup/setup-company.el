@@ -1,13 +1,21 @@
 (require 'company)
 (require 'company-rtags)
+
 (global-company-mode)
+
+(setq rtags-completions-enabled t)
+
+(require 'rtags-helm)
+(setq rtags-use-helm t)
+
+(rtags-start-process-unless-running)
 
 ;; Enable semantics mode for auto-completion
 (require 'cc-mode)
-(require 'semantic)
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(semantic-mode 1)
+;; (require 'semantic)
+;; (global-semanticdb-minor-mode 1)
+;; (global-semantic-idle-scheduler-mode 1)
+;; (semantic-mode 1)
 
 ;; Setup irony-mode to load in c-modes
 (require 'irony)
@@ -16,6 +24,32 @@
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
+
+
+(defun company-diag ()
+        (interactive)
+        (let* ((bb company-backends)
+                backend
+                (prefix (cl-loop for b in bb
+                        thereis (let ((company-backend b))
+                                (setq backend b)
+                                (company-call-backend 'prefix))))
+         cc)
+    (when (stringp prefix)
+      (setq cc (let ((company-backend backend))
+                 (company-call-backend 'candidates prefix))))
+                (pop-to-buffer (get-buffer-create "*company-diag*"))
+                (setq buffer-read-only nil)
+                (erase-buffer)
+                (insert "company-backends: " (pp-to-string bb))
+                (insert "\n")
+                (insert "Used backend: " (pp-to-string backend))
+                (insert "\n")
+                (insert "Prefix: " (pp-to-string prefix))
+                (insert "\n")
+                (insert (message  "Candidates number: %i" (length cc)))
+                (special-mode)))
+
 
 ;; irony-mode hook that is called when irony is triggered
 (defun my-irony-mode-hook ()
@@ -41,50 +75,66 @@
 ;; but some knowledge some knowledge of when best to trigger is still necessary.
 (eval-after-load 'company
   '(add-to-list
-    'company-backends '(company-irony-c-headers
-                        company-irony company-yasnippet
-                        company-clang company-rtags)
+    'company-backends '(company-irony company-irony-c-headers company-rtags)
     )
   )
 
-(defun my-disable-semantic ()
-  "Disable the company-semantic backend."
-  (interactive)
-  (setq company-backends (delete '(company-irony-c-headers
-                                   company-irony company-yasnippet
-                                   company-clang company-rtags
-                                   company-semantic) company-backends))
-  (add-to-list
-   'company-backends '(company-irony-c-headers
-                       company-irony company-yasnippet
-                       company-clang company-rtags))
-  )
-(defun my-enable-semantic ()
-  "Enable the company-semantic backend."
-  (interactive)
-  (setq company-backends (delete '(company-irony-c-headers
-                                   company-irony company-yasnippet
-                                   company-clang) company-backends))
-  (add-to-list
-   'company-backends '(company-irony-c-headers
-                       company-irony company-yasnippet company-clang))
-  )
+
+
+;; (defun my-disable-semantic ()
+;;   "Disable the company-semantic backend."
+;;   (interactive)
+;;   (setq company-backends (delete '(company-irony-c-headers
+;;                                    company-irony company-yasnippet
+;;                                    company-clang company-rtags
+;;                                    company-semantic) company-backends))
+;;   (add-to-list
+;;    'company-backends '(company-irony-c-headers
+;;                        company-irony company-yasnippet
+;;                        company-clang company-rtags))
+;;   )
+;; (defun my-enable-semantic ()
+;;   "Enable the company-semantic backend."
+;;   (interactive)
+;;   (setq company-backends (delete '(company-irony-c-headers
+;;                                    company-irony company-yasnippet
+;;                                    company-clang) company-backends))
+;;   (add-to-list
+;;    'company-backends '(company-irony-c-headers
+;;                        company-irony company-yasnippet company-clang))
+;;   )
 
 ;; Zero delay when pressing tab
 (setq company-idle-delay 0)
-(define-key c-mode-map [(tab)] 'company-complete)
-(define-key c++-mode-map [(tab)] 'company-complete)
+(define-key c-mode-map [(S-tab)] 'company-complete)
+(define-key c++-mode-map [(S-tab)] 'company-complete)
 ;; Delay when idle because I want to be able to think
 (setq company-idle-delay 0.2)
 
 ;; Prohibit semantic from searching through system headers. We want
 ;; company-clang to do that for us.
-(setq-mode-local c-mode semanticdb-find-default-throttle
-                 '(local project unloaded recursive))
-(setq-mode-local c++-mode semanticdb-find-default-throttle
-                 '(local project unloaded recursive))
+;; (setq-mode-local c-mode semanticdb-find-default-throttle
+;;                  '(local project unloaded recursive))
+;; (setq-mode-local c++-mode semanticdb-find-default-throttle
+;;                  '(local project unloaded recursive))
 
-(semantic-remove-system-include "/usr/include/" 'c++-mode)
-(semantic-remove-system-include "/usr/local/include/" 'c++-mode)
-(add-hook 'semantic-init-hooks
-          'semantic-reset-system-include)
+
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c-mode-hook 'flycheck-mode)
+
+(require 'flycheck-rtags)
+
+(defun my-flycheck-rtags-setup ()
+  (flycheck-select-checker 'rtags)
+  ;; RTags creates more accurate overlays.
+  (setq-local flycheck-highlighting-mode nil)
+  (setq-local flycheck-check-syntax-automatically nil))
+;; c-mode-common-hook is also called by c++-mode
+(add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+(add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+
+(provide 'setup-company)
