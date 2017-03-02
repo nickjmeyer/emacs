@@ -31,4 +31,5 @@
  '(magit-branch-remote ((t (:foreground "deep sky blue"))))
  '(magit-hash ((t (:foreground "red3"))))
  '(magit-log-author ((t (:foreground "orange1"))))
- '(magit-section-heading ((t (:foreground "DarkGoldenrod1" :weight bold)))))
+ '(magit-section-heading ((t (:foreground "DarkGoldenrod1" :weight bold))))
+ '(minibuffer-prompt ((t (:foreground "DarkOrange1")))))
