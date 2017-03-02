@@ -33,7 +33,7 @@
   '(auctex
     anzu
     cl
-    cmake-ide
+    ;; cmake-ide
     company
     company-irony
     company-irony-c-headers
@@ -237,18 +237,18 @@
 (setq column-number-mode t)
 
 ;; setup cmake ide
-(cmake-ide-setup)
-(defun cmake-ide/c-c++-hook ()
-  (with-eval-after-load 'projectile
-    (setq cmake-ide-project-dir (projectile-project-root))
-    (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build"))))
+;; (cmake-ide-setup)
+;; (defun cmake-ide/c-c++-hook ()
+;;   (with-eval-after-load 'projectile
+;;     (setq cmake-ide-project-dir (projectile-project-root))
+;;     (setq cmake-ide-build-dir (concat cmake-ide-project-dir "build"))))
 
-(add-hook 'c-mode-hook (lambda ()
-                         (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
-(add-hook 'c++-mode-hook (lambda ()
-                           (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
+;; (add-hook 'c-mode-hook (lambda ()
+;;                          (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
+;; (add-hook 'c++-mode-hook (lambda ()
+;;                            (local-set-key (kbd "C-c C-c") 'cmake-ide-compile)))
 
-(add-hook 'c++-mode-hook #'cmake-ide/c-c++-hook)
+;; (add-hook 'c++-mode-hook #'cmake-ide/c-c++-hook)
 
 
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
