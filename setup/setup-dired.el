@@ -1,5 +1,5 @@
 (provide 'setup-dired)
 
-;; (setq dired-listing-switches "-aBhlX --group-directories-first")
+(setq dired-listing-switches "-ahl")
 
 (setq dired-dwim-target t)
