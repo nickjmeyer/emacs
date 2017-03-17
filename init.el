@@ -55,7 +55,6 @@
     magit
     make-mode
     markdown-mode
-    modern-cpp-font-lock
     protobuf-mode
     ;; function-args
     rtags
@@ -111,56 +110,8 @@
 (require 'setup-editing)
 
 
-;; (windmove-default-keybindings)
-
-;; function-args
-;; (require 'function-args)
-;; (fa-config-default)
-;; (define-key c-mode-map  [(tab)] 'company-complete)
-;; (define-key c++-mode-map  [(tab)] 'company-complete)
-
-;; company
-;; (require 'company)
-;; (if (display-graphic-p)
-;;     (company-quickhelp-mode 1)
-;;   (company-quickhelp-mode 0))
-;; (add-hook 'after-init-hook 'global-company-mode)
-;; (delete 'company-semantic company-backends)
-;; (define-key c-mode-map  [(control tab)] 'company-complete)
-;; (define-key c++-mode-map  [(control tab)] 'company-complete)
-;; (define-key c-mode-map  (kbd "C-TAB") 'company-complete)
-;; (define-key c++-mode-map  (kbd "C-TAB") 'company-complete)
-
-(require 'modern-cpp-font-lock)
-(modern-c++-font-lock-global-mode t)
-
-;; (with-eval-after-load 'company
-;;   (define-key company-active-map (kbd "M-n") nil)
-;;   (define-key company-active-map (kbd "M-p") nil)
-;;   (define-key company-active-map (kbd "C-n") 'company-select-next)
-;;   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-;; (define-key c-mode-map  [(control tab)] 'company-complete)
-;; (define-key c++-mode-map  [(control tab)] 'company-complete)
-
-;; company-c-headers
-;; (add-to-list 'company-backends 'company-c-headers)
-
-;; hs-minor-mode for folding source code
-;; (add-hook 'c-mode-common-hook 'hs-minor-mode)
-
-;; Available C style:
-;; “gnu”: The default style for GNU projects
-;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
-;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
-;; “whitesmith”: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
-;; “stroustrup”: What Stroustrup, the author of C++ used in his book
-;; “ellemtel”: Popular C++ coding standards as defined by “Programming in C++, Rules and Recommendations,” Erik Nyquist and Mats Henricson, Ellemtel
-;; “linux”: What the Linux developers use for kernel development
-;; “python”: What Python developers use for extension modules
-;; “java”: The default style for java-mode (see below)
-;; “user”: When you want to define your own style
 (defconst my-cc-style
   '("linux"
     (c-basic-offset . 4)
@@ -209,9 +160,6 @@
 (setq projectile-completion-system 'helm)
 (setq projectile-indexing-method 'alien)
 
-;; Package zygospore
-(global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
-
 ;; use ssh config in tramnp
 (tramp-set-completion-function "ssh"
                                '((tramp-parse-sconfig "/etc/ssh_config")
@@ -220,8 +168,8 @@
 
 ;; customization
 (setq custom-file "~/.emacs.d/customization.el")
-(load custom-file)
-
+(if (file-exists-p custom-file)
+    (load custom-file))
 
 ;; get rid of mouse while typing
 (setq mouse-avoidance-mode 'banish)
