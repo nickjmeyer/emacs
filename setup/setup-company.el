@@ -12,10 +12,10 @@
 
 ;; Enable semantics mode for auto-completion
 (require 'cc-mode)
-;; (require 'semantic)
-;; (global-semanticdb-minor-mode 1)
-;; (global-semantic-idle-scheduler-mode 1)
-;; (semantic-mode 1)
+(require 'semantic)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+(semantic-mode 1)
 
 ;; Setup irony-mode to load in c-modes
 (require 'irony)
@@ -75,7 +75,8 @@
 ;; but some knowledge some knowledge of when best to trigger is still necessary.
 (eval-after-load 'company
   '(add-to-list
-    'company-backends '(company-irony company-irony-c-headers company-rtags)
+    'company-backends '(company-irony company-irony-c-headers company-clang
+                                      company-rtags company-semantic)
     )
   )
 
@@ -113,10 +114,10 @@
 
 ;; Prohibit semantic from searching through system headers. We want
 ;; company-clang to do that for us.
-;; (setq-mode-local c-mode semanticdb-find-default-throttle
-;;                  '(local project unloaded recursive))
-;; (setq-mode-local c++-mode semanticdb-find-default-throttle
-;;                  '(local project unloaded recursive))
+(setq-mode-local c-mode semanticdb-find-default-throttle
+                 '(local project unloaded recursive))
+(setq-mode-local c++-mode semanticdb-find-default-throttle
+                 '(local project unloaded recursive))
 
 
 (add-hook 'c++-mode-hook 'flycheck-mode)
