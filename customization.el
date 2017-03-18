@@ -36,4 +36,5 @@
  '(magit-section-heading-selection ((t (:background "gray32"))))
  '(magit-section-highlight ((t (:background "gray32"))))
  '(minibuffer-prompt ((t (:foreground "DarkOrange1"))))
- '(region ((t (:background "gray32")))))
+ '(region ((t (:background "gray32"))))
+ '(whitespace-line ((t (:underline (:color "magenta1" :style wave))))))
