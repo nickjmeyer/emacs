@@ -4,26 +4,6 @@
 (package-initialize)
 (package-refresh-contents)
 
-;; fix for max osx
-(when (string= system-type "darwin")
-  (setq dired-use-ls-dired nil))
-
-(setq gc-cons-threshold 100000000)
-(setq inhibit-startup-message t)
-
-;; Emacs backup control
-(setq backup-by-copying t
-      backup-directory-alist '(("." . "~/.emacsBkups"))
-      delete-old-versions t
-      kept-new-versions 5
-      version-control t)
-
-;; abbrev mode
-(setq abbrev-file-name  "~/.emacs.d/abbrev_defs")
-(setq save-abbrevs t)
-(setq-default abbrev-mode t)
-
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defconst necessary-packages
@@ -80,6 +60,27 @@
 
 ;; get path from shell environment
 (exec-path-from-shell-initialize)
+
+
+;; fix for max osx
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+
+(setq gc-cons-threshold 100000000)
+(setq inhibit-startup-message t)
+
+;; Emacs backup control
+(setq backup-by-copying t
+      backup-directory-alist '(("." . "~/.emacsBkups"))
+      delete-old-versions t
+      kept-new-versions 5
+      version-control t)
+
+;; abbrev mode
+(setq abbrev-file-name  "~/.emacs.d/abbrev_defs")
+(setq save-abbrevs t)
+(setq-default abbrev-mode t)
+
 
 ;; this variables must be set before load helm-gtags
 ;; you can change to any prefix key of your choice
