@@ -4,9 +4,6 @@
 (package-initialize)
 (package-refresh-contents)
 
-;; get path from shell environment
-(exec-path-from-shell-initialize)
-
 ;; fix for max osx
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
@@ -80,6 +77,9 @@
       (package-install package))))
 
 (install-packages)
+
+;; get path from shell environment
+(exec-path-from-shell-initialize)
 
 ;; this variables must be set before load helm-gtags
 ;; you can change to any prefix key of your choice
