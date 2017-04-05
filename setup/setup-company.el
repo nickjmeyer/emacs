@@ -3,10 +3,13 @@
 
 (global-company-mode)
 
-(setq rtags-completions-enabled t)
 
-(require 'rtags-helm)
+(require 'helm-rtags)
 (setq rtags-use-helm t)
+
+(setq rtags-completions-enabled t)
+(setq rtags-autostart-diagnostics t)
+(rtags-diagnostics)
 
 (rtags-start-process-unless-running)
 
