@@ -11,6 +11,7 @@
     anzu
     cl
     ;; cmake-ide
+    cmake-mode
     company
     company-irony
     company-irony-c-headers
