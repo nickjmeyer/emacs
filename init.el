@@ -108,7 +108,6 @@
 
 (require 'setup-helm)
 (require 'setup-helm-gtags)
-(require 'setup-cedet)
 (require 'setup-editing)
 
 
