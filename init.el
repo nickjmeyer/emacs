@@ -37,6 +37,7 @@
     protobuf-mode
     ;; function-args
     rtags
+    rust-mode
     clean-aindent-mode
     comment-dwim-2
     dtrt-indent
