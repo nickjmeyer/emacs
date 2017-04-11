@@ -204,6 +204,7 @@
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 
 (require 'git-gutter-fringe)
+(global-git-gutter-mode 1)
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
