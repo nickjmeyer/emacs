@@ -205,6 +205,7 @@
 
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
+(setq git-gutter-fr:side 'right-fringe)
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
