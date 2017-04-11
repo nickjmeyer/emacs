@@ -96,7 +96,6 @@
 (require 'setup-ess)
 (require 'setup-faces)
 (require 'setup-company)
-(require 'setup-irony)
 (require 'setup-jedi)
 (require 'setup-julia)
 (require 'setup-magit)
