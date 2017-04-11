@@ -21,6 +21,7 @@
     ess
     exec-path-from-shell
     flycheck-irony
+    git-gutter-fringe
     groovy-mode
     helm
     helm-company
@@ -202,6 +203,8 @@
 
 
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+
+(require 'git-gutter-fringe)
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
