@@ -1,17 +1,17 @@
 (require 'company)
-(require 'company-rtags)
+;; (require 'company-rtags)
 
 (global-company-mode)
 
 
-(require 'helm-rtags)
-(setq rtags-use-helm t)
+;; (require 'helm-rtags)
+;; (setq rtags-use-helm t)
 
-(setq rtags-completions-enabled t)
-(setq rtags-autostart-diagnostics t)
-(rtags-diagnostics)
+;; (setq rtags-completions-enabled t)
+;; (setq rtags-autostart-diagnostics t)
+;; (rtags-diagnostics)
 
-(rtags-start-process-unless-running)
+;; (rtags-start-process-unless-running)
 
 ;; Enable semantics mode for auto-completion
 (require 'cc-mode)
@@ -19,6 +19,14 @@
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
 (semantic-mode 1)
+
+;; Increase the delay before activation
+(setq semantic-idle-scheduler-idle-time 10)
+;; Don't reparse really big buffers.
+(setq semantic-idle-scheduler-max-buffer-size 100000)
+;; Increase the delay before doing slow work to 2 minutes.
+(setq semantic-idle-scheduler-work-idle-time 120)
+
 
 ;; Setup irony-mode to load in c-modes
 (require 'irony)
@@ -79,7 +87,8 @@
 (eval-after-load 'company
   '(add-to-list
     'company-backends '(company-irony company-irony-c-headers company-clang
-                                      company-rtags company-semantic)
+                                      ;; company-rtags company-semantic
+                                      )
     )
   )
 
@@ -126,16 +135,16 @@
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
 
-(require 'flycheck-rtags)
+;; (require 'flycheck-rtags)
 
-(defun my-flycheck-rtags-setup ()
-  (flycheck-select-checker 'rtags)
-  ;; RTags creates more accurate overlays.
-  (setq-local flycheck-highlighting-mode nil)
-  (setq-local flycheck-check-syntax-automatically nil))
-;; c-mode-common-hook is also called by c++-mode
-(add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
-(add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+;; (defun my-flycheck-rtags-setup ()
+;;   (flycheck-select-checker 'rtags)
+;;   ;; RTags creates more accurate overlays.
+;;   (setq-local flycheck-highlighting-mode nil)
+;;   (setq-local flycheck-check-syntax-automatically nil))
+;; ;; c-mode-common-hook is also called by c++-mode
+;; (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+;; (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
 
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
