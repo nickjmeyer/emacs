@@ -200,12 +200,30 @@
 
 ;; (add-hook 'c++-mode-hook #'cmake-ide/c-c++-hook)
 
-
 ;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
 (setq git-gutter-fr:side 'right-fringe)
+
+
+(defun njm/set-font-size (height)
+  (interactive
+   (list
+    (read-number "Enter font size: ")))
+  (set-face-attribute 'default nil :height height)
+  (message (format "Font size: %d" (face-attribute 'default :height))))
+
+(defun njm/increase-font-size ()
+  (interactive)
+  (njm/set-font-size (+ (face-attribute 'default :height) 10))
+  (message (format "Font size: %d" (face-attribute 'default :height))))
+
+(defun njm/decrease-font-size ()
+  (interactive)
+  (njm/set-font-size (- (face-attribute 'default :height) 10))
+  (message (format "Font size: %d" (face-attribute 'default :height))))
+
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
