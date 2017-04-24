@@ -28,12 +28,14 @@
     helm-gtags
     helm-projectile
     helm-swoop
+    htmlize
     irony
     jedi
     julia-mode
     magit
     make-mode
     markdown-mode
+    ox-reveal
     protobuf-mode
     ;; function-args
     rtags
