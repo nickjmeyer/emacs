@@ -211,12 +211,16 @@
 (setq git-gutter-fr:side 'right-fringe)
 
 
+(defun njm/show-font-size ()
+  (interactive)
+  (message (format "Font size: %d" (face-attribute 'default :height))))
+
 (defun njm/set-font-size (height)
   (interactive
    (list
     (read-number "Enter font size: ")))
   (set-face-attribute 'default nil :height height)
-  (message (format "Font size: %d" (face-attribute 'default :height))))
+  (njm/show-font-size))
 
 (defun njm/increase-font-size ()
   (interactive)
@@ -227,6 +231,14 @@
   (interactive)
   (njm/set-font-size (- (face-attribute 'default :height) 10))
   (message (format "Font size: %d" (face-attribute 'default :height))))
+
+(defun njm/setup-for-laptop ()
+  (interactive)
+  (njm/set-font-size 120))
+
+(defun njm/setup-for-external ()
+  (interactive)
+  (njm/set-font-size 160))
 
 
 ;; prevent accidental closes of emacs
