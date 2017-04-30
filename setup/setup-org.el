@@ -1,6 +1,8 @@
 (require 'org)
 (require 'ox-html)
 (require 'ob-sh)
+(require 'ox-reveal)
+(require 'htmlize)
 
 (setq initial-major-mode 'org-mode)
 (setq initial-scratch-message "# This is a scratch Org buffer")
@@ -8,6 +10,9 @@
 (add-hook 'org-mode-hook '(lambda ()
                             (auto-fill-mode 1)))
 (add-hook 'org-mode-hook 'turn-on-flyspell)
+
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
+(setq org-reveal-mathjax t)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
