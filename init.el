@@ -229,6 +229,10 @@
   (message (format "Font size: %d" (face-attribute 'default :height))))
 
 
+;; prevent accidental closes of emacs
+(setq confirm-kill-emacs 'y-or-n-p)
+
+
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
     (load "~/.emacs.d/machineCustom.el")
