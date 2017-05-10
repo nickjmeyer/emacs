@@ -4,6 +4,10 @@ irony/
 
 projectile.cache
 
+install-rtags.sh
+rtags-*.*
+
+
 /url/cache
 /.emacs.desktop
 /auto-save-list
