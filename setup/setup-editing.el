@@ -280,11 +280,11 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-o") 'prelude-smart-open-line)
 (global-set-key (kbd "M-o") 'open-line)
 
-;; java
-;; (add-hook 'java-mode-hook (lambda ()
-;; 														(setq c-basic-offset 2
-;; 																	c-block-comment-prefix "* "
-;; 																	tab-width 2
-;; 																	indent-tabs-mode t)))
+;; add short cuts for increase and decrease indentation in python
+(add-hook 'python-mode-hook
+          (lambda ()
+            (define-key python-mode-map (kbd "C-x <") 'decrease-left-margin)
+            (define-key python-mode-map (kbd "C-x >") 'increase-left-margin)
+          ))
 
 (provide 'setup-editing)
