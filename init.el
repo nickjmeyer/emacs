@@ -232,11 +232,11 @@
   (njm/set-font-size (- (face-attribute 'default :height) 10))
   (message (format "Font size: %d" (face-attribute 'default :height))))
 
-(defun njm/setup-for-laptop ()
+(defun njm/laptop-setup ()
   (interactive)
   (njm/set-font-size 120))
 
-(defun njm/setup-for-external ()
+(defun njm/external-setup ()
   (interactive)
   (njm/set-font-size 160))
 
