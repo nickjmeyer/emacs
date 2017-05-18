@@ -32,12 +32,12 @@
 
 
 ;; Setup irony-mode to load in c-modes
-(require 'irony)
-(require 'company-irony-c-headers)
+;; (require 'irony)
+;; (require 'company-irony-c-headers)
 (require 'cl)
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+;; (add-hook 'c++-mode-hook 'irony-mode)
+;; (add-hook 'c-mode-hook 'irony-mode)
+;; (add-hook 'objc-mode-hook 'irony-mode)
 
 
 (defun company-diag ()
@@ -66,18 +66,18 @@
 
 
 ;; irony-mode hook that is called when irony is triggered
-(defun my-irony-mode-hook ()
-  "Custom irony mode hook to remap keys."
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
+;; (defun my-irony-mode-hook ()
+;;   "Custom irony mode hook to remap keys."
+;;   (define-key irony-mode-map [remap completion-at-point]
+;;     'irony-completion-at-point-async)
+;;   (define-key irony-mode-map [remap complete-symbol]
+;;     'irony-completion-at-point-async))
 
-(add-hook 'irony-mode-hook 'my-irony-mode-hook)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;; (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;; company-irony setup, c-header completions
-(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 ;; Remove company-semantic because it has higher precedance than company-clang
 ;; Using RTags completion is also faster than semantic, it seems. Semantic
 ;; also provides a bunch of technically irrelevant completions sometimes.
@@ -89,7 +89,8 @@
 ;; but some knowledge some knowledge of when best to trigger is still necessary.
 (eval-after-load 'company
   '(add-to-list
-    'company-backends '(company-irony company-irony-c-headers company-clang
+    'company-backends '(;; company-irony company-irony-c-headers
+                                      company-clang
                                       company-rtags ;; company-semantic
                                       )
     )
@@ -149,8 +150,8 @@
 (add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
 (add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
 
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+;; (eval-after-load 'flycheck
+;;   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 
 (provide 'setup-company)
