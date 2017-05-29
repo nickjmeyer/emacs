@@ -39,6 +39,7 @@
     make-mode
     markdown-mode
     ox-reveal
+    pdf-tools
     protobuf-mode
     ;; function-args
     rtags
