@@ -19,6 +19,7 @@
     company-irony-c-headers
     company-jedi
     company-quickhelp
+    company-rtags
     duplicate-thing
     ess
     exec-path-from-shell
