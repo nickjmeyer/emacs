@@ -237,11 +237,17 @@
 
 (defun njm/laptop-setup ()
   (interactive)
-  (njm/set-font-size 120))
+  (message "Begin setup for laptop")
+  (njm/set-font-size 120)
+  (message "Laptop setup complete")
+  )
 
 (defun njm/external-setup ()
   (interactive)
-  (njm/set-font-size 160))
+  (message "Begin setup for external")
+  (njm/set-font-size 160)
+  (message "External setup complete")
+  )
 
 
 ;; prevent accidental closes of emacs
