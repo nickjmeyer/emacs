@@ -30,6 +30,7 @@
     helm-company
     helm-gtags
     helm-projectile
+    helm-rtags
     helm-swoop
     htmlize
     irony
