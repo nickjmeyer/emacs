@@ -46,6 +46,7 @@
     rtags
     rust-mode
     tide
+    typescript-mode
     clean-aindent-mode
     comment-dwim-2
     dtrt-indent
@@ -114,6 +115,7 @@
 (require 'setup-protobuf)
 (require 'setup-games) ;; emacs games (e.g., snake and tetris)
 (require 'setup-whitespace)
+(require 'setup-typescript)
 
 (require 'setup-helm)
 (require 'setup-helm-gtags)
