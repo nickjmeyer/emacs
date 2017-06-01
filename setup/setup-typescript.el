@@ -1,4 +1,4 @@
-
+(require 'tide)
 
 (defun setup-tide-mode ()
   (interactive)
@@ -23,5 +23,10 @@
 (setq tide-format-options
       '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions
         t :placeOpenBraceOnNewLineForFunctions nil))
+
+(add-hook 'js2-mode-hook #'setup-tide-mode)
+;; configure javascript-tide checker to run after your default
+;; javascript checker
+(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
 (provide 'setup-typescript)
