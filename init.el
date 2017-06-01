@@ -45,6 +45,7 @@
     ;; function-args
     rtags
     rust-mode
+    tide
     clean-aindent-mode
     comment-dwim-2
     dtrt-indent
