@@ -29,4 +29,6 @@
 ;; javascript checker
 (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
+(setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
+
 (provide 'setup-typescript)
