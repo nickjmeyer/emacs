@@ -6,7 +6,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
+    (json-mode tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -37,4 +37,5 @@
  '(magit-section-highlight ((t (:background "gray32"))))
  '(minibuffer-prompt ((t (:foreground "DarkOrange1"))))
  '(region ((t (:background "gray32"))))
+ '(tide-hl-identifier-face ((t (:inherit highlight))))
  '(whitespace-line ((t (:underline (:color "magenta1" :style wave))))))
