@@ -219,24 +219,27 @@
 
 (defun njm/show-font-size ()
   (interactive)
-  (message (format "Font size: %d" (face-attribute 'default :height))))
+  (message (format "Font size: %d"
+                   (face-attribute 'default (selected-frame) :height)))
+  )
 
 (defun njm/set-font-size (height)
   (interactive
    (list
     (read-number "Enter font size: ")))
-  (set-face-attribute 'default nil :height height)
-  (njm/show-font-size))
+  (set-face-attribute 'default (selected-frame) :height height)
+  (njm/show-font-size)
+  )
 
 (defun njm/increase-font-size ()
   (interactive)
-  (njm/set-font-size (+ (face-attribute 'default :height) 10))
-  (message (format "Font size: %d" (face-attribute 'default :height))))
+  (njm/set-font-size (+ (face-attribute 'default (selected-frame) :height) 10))
+  )
 
 (defun njm/decrease-font-size ()
   (interactive)
-  (njm/set-font-size (- (face-attribute 'default :height) 10))
-  (message (format "Font size: %d" (face-attribute 'default :height))))
+  (njm/set-font-size (- (face-attribute 'default (selected-frame) :height) 10))
+  )
 
 (defun njm/laptop-setup ()
   (interactive)
