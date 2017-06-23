@@ -220,7 +220,7 @@
 (defun njm/show-font-size ()
   (interactive)
   (message (format "Font size: %d"
-                   (face-attribute 'default (selected-frame) :height)))
+                   (face-attribute 'default :height)))
   )
 
 (defun njm/set-font-size (height)
