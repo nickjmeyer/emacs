@@ -223,35 +223,39 @@
                    (face-attribute 'default :height)))
   )
 
-(defun njm/set-font-size (height)
+(defun njm/set-font-size (height &optional frame)
   (interactive
    (list
     (read-number "Enter font size: ")))
-  (set-face-attribute 'default (selected-frame) :height height)
+  (set-face-attribute 'default frame :height height)
   (njm/show-font-size)
   )
 
 (defun njm/increase-font-size ()
   (interactive)
-  (njm/set-font-size (+ (face-attribute 'default (selected-frame) :height) 10))
+  (njm/set-font-size
+   (+ (face-attribute 'default (selected-frame) :height) 10)
+   (selected-frame))
   )
 
 (defun njm/decrease-font-size ()
   (interactive)
-  (njm/set-font-size (- (face-attribute 'default (selected-frame) :height) 10))
+  (njm/set-font-size
+   (- (face-attribute 'default (selected-frame) :height) 10)
+   (selected-frame))
   )
 
 (defun njm/laptop-setup ()
   (interactive)
   (message "Begin setup for laptop")
-  (njm/set-font-size 120)
+  (njm/set-font-size 120 (selected-frame))
   (message "Laptop setup complete")
   )
 
 (defun njm/external-setup ()
   (interactive)
   (message "Begin setup for external")
-  (njm/set-font-size 160)
+  (njm/set-font-size 160 (selected-frame))
   (message "External setup complete")
   )
 
