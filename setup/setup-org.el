@@ -11,7 +11,6 @@
                             (auto-fill-mode 1)))
 (add-hook 'org-mode-hook 'turn-on-flyspell)
 
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
 (setq org-reveal-mathjax t)
 
 (define-key global-map "\C-cl" 'org-store-link)
