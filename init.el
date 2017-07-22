@@ -264,6 +264,21 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 
 
+(require 'ansi-color)
+(defun endless/colorize-compilation ()
+  "Colorize from `compilation-filter-start' to `point'."
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region
+     compilation-filter-start (point))))
+
+(add-hook 'compilation-filter-hook
+          #'endless/colorize-compilation)
+
+(setq compilation-scroll-output t)
+
+(require 'groovy-mode)
+
+
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
     (load "~/.emacs.d/machineCustom.el")
