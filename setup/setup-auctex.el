@@ -36,8 +36,8 @@
 (setq TeX-PDF-mode t)
 
 ;; configure latexmk
-(auctex-latexmk-setup)
 (require 'auctex-latexmk)
+(auctex-latexmk-setup)
 (setq auctex-latexmk-inherit-TeX-PDF-mode t)
 
 (provide 'setup-auctex)
