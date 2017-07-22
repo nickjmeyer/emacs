@@ -10,6 +10,7 @@
 
 (defconst necessary-packages
   '(auctex
+    auctex-latexmk
     anzu
     cl
     ;; cmake-ide

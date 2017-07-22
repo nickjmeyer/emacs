@@ -35,4 +35,9 @@
 (setq TeX-parse-self t)
 (setq TeX-PDF-mode t)
 
+;; configure latexmk
+(auctex-latexmk-setup)
+(require 'auctex-latexmk)
+(setq auctex-latexmk-inherit-TeX-PDF-mode t)
+
 (provide 'setup-auctex)
