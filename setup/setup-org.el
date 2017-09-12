@@ -1,8 +1,12 @@
 (require 'org)
 (require 'ox-html)
-(require 'ob-sh)
-(require 'ox-reveal)
+(require 'ob-shell)
 (require 'htmlize)
+(require 'org-ref)
+
+(add-to-list 'load-path "~/projects/org-reveal")
+(require 'ox-reveal)
+
 
 (setq initial-major-mode 'org-mode)
 (setq initial-scratch-message "# This is a scratch Org buffer")
@@ -70,7 +74,7 @@
    (python . t)
    (julia . t)
    (latex . t)
-   (sh . t)
+   (shell . t)
    ))
 
 (setq org-publish-project-alist

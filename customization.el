@@ -4,9 +4,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   (quote
+    ("~/presentations/pres-defense/src/defense.org" "~/presentations/pres-JSM-2017/src/meyer_jsm_2017.org")))
  '(package-selected-packages
    (quote
-    (json-mode tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
+    (web-mode org-ref auctex-latexmk json-mode tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
