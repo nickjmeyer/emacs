@@ -4,7 +4,9 @@
 (require 'rtags)
 (require 'company-rtags)
 
-(setq rtags-install-path (expand-file-name "~/.emacs.d/"))
+(setq rtags-path "~/rtags/install/bin/")
+(setq rtags-install-path "~/rtags/install/")
+(add-to-list 'load-path (concat rtags-install-path "share/emacs/site-lisp/rtags"))
 
 
 (require 'helm-rtags)
