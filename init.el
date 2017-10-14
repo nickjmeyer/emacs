@@ -41,6 +41,7 @@
     make-mode
     markdown-mode
     ox-reveal
+    org-ref
     pdf-tools
     protobuf-mode
     ;; function-args
