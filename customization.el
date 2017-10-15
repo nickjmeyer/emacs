@@ -4,18 +4,21 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" default)))
  '(org-agenda-files
    (quote
     ("~/presentations/pres-defense/src/defense.org" "~/presentations/pres-JSM-2017/src/meyer_jsm_2017.org")))
  '(package-selected-packages
    (quote
-    (web-mode org-ref auctex-latexmk json-mode tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
+    (dired+ web-mode org-ref auctex-latexmk json-mode tide typescript-mode pdf-tools modern-cpp-font-lock exec-path-from-shell zygospore undo-tree volatile-highlights smartparens yasnippet iedit ws-butler dtrt-indent comment-dwim-2 clean-aindent-mode protobuf-mode markdown-mode magit jedi helm-swoop helm-projectile helm-gtags helm groovy-mode ess duplicate-thing company-quickhelp company-jedi company cmake-mode anzu auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray20" :foreground "#eedc82" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Menlo"))))
+ '(default ((t (:inherit nil :stipple nil :background "gray20" :foreground "#eedc82" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil"))))
  '(company-scrollbar-bg ((t (:background "alternateSelectedControlColor"))))
  '(company-scrollbar-fg ((t (:background "dark slate blue"))))
  '(company-tooltip ((t (:background "MediumPurple4" :foreground "gray60"))))

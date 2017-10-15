@@ -70,9 +70,9 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((R . t)
+ '(;; (R . t)
    (python . t)
-   (julia . t)
+   ;; (julia . t)
    (latex . t)
    (shell . t)
    ))
