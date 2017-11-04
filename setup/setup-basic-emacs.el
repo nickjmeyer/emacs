@@ -1,13 +1,36 @@
 ;; Setup basic emacs configurations
 (provide 'setup-basic-emacs)
 
+;; Get rid of mouse while typing
+(setq mouse-avoidance-mode 'banish)
+
+;; Turn off system bell
+(setq ring-bell-function 'ignore)
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+
+;; Cleanup interface
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(blink-cursor-mode)
+(setq column-number-mode t)
+
+;; Kill ring stuff
+(setq global-mark-ring-max 5000) ;; increase mark ring to contains 5000 entries
+(setq mark-ring-max 5000) ;; increase mark ring to contains 5000 entries
+(setq kill-ring-max 5000) ;; increase kill-ring capacity
+(setq kill-whole-line t)  ;; if NIL, kill whole line and move the next line up
+
 ;; Shorten prompt
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Get path from shell environment
 (exec-path-from-shell-initialize)
 
-(setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
 ;; Emacs backup control
@@ -15,10 +38,11 @@
 (setq auto-save-default nil)
 
 ;; Abbrev mode
-(setq save-abbrevs t)
-(setq-default abbrev-mode t)
+(setq save-abbrevs nil)
+(setq-default abbrev-mode nil)
 
 ;; Fix garbage collection
+(setq gc-cons-threshold 100000000)
 (setq gc-cons-threshold (eval-when-compile (* 1024 1024 1024)))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 

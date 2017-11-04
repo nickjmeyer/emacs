@@ -1,5 +1,5 @@
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
@@ -8,84 +8,114 @@
 (unless (package-installed-p 'use-package)
       (package-install use-package))
 
-
 (add-to-list 'load-path "~/.emacs.d/setup")
-(require 'setup-packages)
+
 (require 'setup-basic-emacs)
-(require 'setup-evil)
-(require 'setup-interface)
-(require 'setup-games)
-(require 'setup-magit)
-(require 'setup-helm)
-(require 'setup-editing)
-(require 'setup-company)
-;; (require 'setup-auctex)
-;; (require 'setup-dired)
-;; (require 'setup-eshell)
-;; (require 'setup-ess)
-;; (require 'setup-faces)
-;; (require 'setup-company)
-;; (require 'setup-jedi)
-;; (require 'setup-julia)
-;; (require 'setup-make)
-;; (require 'setup-markdown)
-;; (require 'setup-org)
-;; (require 'setup-protobuf)
-;; (require 'setup-whitespace)
-;; (require 'setup-typescript)
 
-;; (require 'setup-helm)
-;; (require 'setup-helm-gtags)
+;; Better undo
+(use-package undo-tree
+  :ensure t
+  :diminish undo-tree-mode
+  :init
+  (global-undo-tree-mode 1))
 
+;; Trim down the mode line
+(use-package diminish
+  :ensure t)
 
-;; (require 'dired+)
+(use-package cl
+  :ensure t)
 
+(use-package exec-path-from-shell
+  :ensure t)
 
-;; this variables must be set before load helm-gtags
-;; you can change to any prefix key of your choice
-(setq helm-gtags-prefix-key "\C-cg")
+;; Make mode line more appealing
+(use-package powerline
+  :ensure t
+  :init
+  (setq powerline-default-separator-dir '(right . left)))
 
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq sml/theme 'powerline)
+  (add-hook 'after-init-hook 'sml/setup))
 
+(set-face-attribute 'mode-line nil
+                    :foreground "Black"
+                    :background "DarkOrange"
+                    :box nil)
 
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
-(defconst my-cc-style
-  '("linux"
-    (c-basic-offset . 4)
-    (c-offsets-alist . ((innamespace . [0])
-                        (arglist-intro . ++)
-                        (arglist-close . ++)
-                        (arglist-cont . 0)
-                        (arglist-cont-nonempty . ++)))
-    (c-block-comment-prefix . "* ")
-    ))
-(c-add-style "my-cc-style" my-cc-style)
-
-(setq c-default-style "my-cc-style")
-
+;; Formatting stuff
+(setq mode-require-final-newline t)      ;; add a newline to end of file
+(setq-default tab-width 2) ;; default to 2 visible spaces to display a tab
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
+(use-package aggressive-indent
+  :ensure t
+  :diminish aggressive-indent-mode
+  :config
+  (global-aggressive-indent-mode 1))
 
-;; setup GDB
-(setq
- ;; use gdb-many-windows by default
- gdb-many-windows t
+;; Evil mode because my pinky gets tired...
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
 
- ;; Non-nil means display source file containing the main routine at startup
- gdb-show-main t
- )
+;; Games are fun...
+(unless (file-exists-p "~/.emacs-games")
+  (make-directory "~/.emacs-games"))
+(setq tetris-score-file "~/.emacs-games/tetris-scores")
+(setq snake-score-file "~/.emacs-games/snake-scores")
 
-;; Package: projejctile
-(require 'projectile)
-(projectile-global-mode)
-(setq projectile-enable-caching t)
+;; Helm is a necessity
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :config
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (global-set-key (kbd "C-x b") #'helm-buffers-list)
+  (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+  ;; Fuzzy matching
+  (setq helm-buffers-fuzzy-matching t)
+  ;; Open helm buffer inside current window to not disturb other windows
+  (setq helm-split-window-in-side-p t))
 
-(require 'helm-projectile)
-(helm-projectile-on)
-(setq projectile-completion-system 'helm)
-(setq projectile-indexing-method 'alien)
+;; Complete Anything
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :config
+  (global-company-mode)
+  (setq company-backends nil))
+(use-package helm-company
+  :ensure t)
+
+;; Set up for C and C++ languages
+(require 'setup-c-cpp)
+
+;; Set up git
+(require 'setup-git)
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-enable-caching t))
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-indexing-method 'alien))
 
 ;; use ssh config in tramnp
+(require 'tramp)
 (tramp-set-completion-function "ssh"
                                '((tramp-parse-sconfig "/etc/ssh_config")
                                  (tramp-parse-sconfig "~/.ssh/config")))
@@ -95,12 +125,6 @@
 (setq custom-file "~/.emacs.d/customization.el")
 (if (file-exists-p custom-file)
     (load custom-file))
-
-
-(require 'git-gutter-fringe)
-(global-git-gutter-mode 1)
-(setq git-gutter-fr:side 'right-fringe)
-
 
 (defun njm/show-font-size ()
   (interactive)
