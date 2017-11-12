@@ -6,7 +6,7 @@
 (package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
-      (package-install use-package))
+      (package-install 'use-package))
 
 (add-to-list 'load-path "~/.emacs.d/setup")
 
@@ -26,9 +26,6 @@
 (use-package cl
   :ensure t)
 
-(use-package exec-path-from-shell
-  :ensure t)
-
 ;; Make mode line more appealing
 (use-package powerline
   :ensure t
@@ -38,8 +35,18 @@
 (use-package smart-mode-line
   :ensure t
   :config
-  (setq sml/theme 'powerline)
-  (add-hook 'after-init-hook 'sml/setup))
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/name-width 40)
+  (setq sml/mode-width 'full))
+
+(use-package smart-mode-line-powerline-theme
+  :ensure t
+  :after powerline
+  :after smart-mode-line
+  :config
+  (sml/apply-theme 'powerline)
+  (sml/setup)
+  )
 
 (set-face-attribute 'mode-line nil
                     :foreground "Black"
@@ -59,10 +66,10 @@
   (global-aggressive-indent-mode 1))
 
 ;; Evil mode because my pinky gets tired...
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
+;; (use-package evil
+;;   :ensure t
+;;   :config
+;;   (evil-mode 1))
 
 ;; Games are fun...
 (unless (file-exists-p "~/.emacs-games")
@@ -182,8 +189,8 @@
 
 (setq compilation-scroll-output t)
 
-(require 'groovy-mode)
-
+(use-package groovy-mode
+  :ensure t)
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
