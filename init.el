@@ -2,15 +2,23 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 (package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
       (package-install 'use-package))
 
+(add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
 (add-to-list 'load-path "~/.emacs.d/setup")
 
 (require 'setup-basic-emacs)
+
+;; (use-package exwm
+;;   :config
+;;   (exwm-enable)
+;;   (require 'setup-exwm))
 
 ;; Better undo
 (use-package undo-tree
@@ -27,31 +35,28 @@
   :ensure t)
 
 ;; Make mode line more appealing
+(use-package powerline-evil
+  :ensure t)
 (use-package powerline
   :ensure t
-  :init
-  (setq powerline-default-separator-dir '(right . left)))
-
-(use-package smart-mode-line
-  :ensure t
   :config
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/name-width 40)
-  (setq sml/mode-width 'full))
+  (powerline-evil-vim-theme))
 
-(use-package smart-mode-line-powerline-theme
+(use-package flycheck
+  :ensure t)
+
+(use-package json-mode
+  :ensure t)
+
+(use-package flycheck-demjsonlint
   :ensure t
-  :after powerline
-  :after smart-mode-line
-  :config
-  (sml/apply-theme 'powerline)
-  (sml/setup)
-  )
+  :pin melpa)
 
-(set-face-attribute 'mode-line nil
-                    :foreground "Black"
-                    :background "DarkOrange"
-                    :box nil)
+(use-package yaml-mode
+  :ensure t)
+
+(use-package flycheck-yamllint
+  :ensure t)
 
 ;; Formatting stuff
 (setq mode-require-final-newline t)      ;; add a newline to end of file
@@ -59,17 +64,28 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
-(use-package aggressive-indent
-  :ensure t
-  :diminish aggressive-indent-mode
-  :config
-  (global-aggressive-indent-mode 1))
+;; (use-package aggressive-indent
+;;   :ensure t
+;;   :diminish aggressive-indent-mode
+;;   :config
+;;   (global-aggressive-indent-mode 1))
 
 ;; Evil mode because my pinky gets tired...
-;; (use-package evil
-;;   :ensure t
-;;   :config
-;;   (evil-mode 1))
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+
+(use-package evil-mc
+  :ensure t
+  :config
+  (global-evil-mc-mode 1))
+
+(use-package multi-term
+  :ensure t
+  :config
+  (setq multi-term-program "/bin/bash")
+  (global-set-key (kbd "C-x t") #'multi-term-dedicated-toggle))
 
 ;; Games are fun...
 (unless (file-exists-p "~/.emacs-games")
@@ -82,15 +98,20 @@
   :ensure t
   :diminish helm-mode
   :config
-  (helm-mode 1)
-  (global-set-key (kbd "M-x") #'helm-M-x)
-  (global-set-key (kbd "C-x C-f") #'helm-find-files)
-  (global-set-key (kbd "C-x b") #'helm-buffers-list)
-  (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-  ;; Fuzzy matching
-  (setq helm-buffers-fuzzy-matching t)
-  ;; Open helm buffer inside current window to not disturb other windows
-  (setq helm-split-window-in-side-p t))
+  (require 'setup-helm))
+
+(use-package ggtags
+  :ensure t
+  :config
+  ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+  (eval-after-load 'ggtags
+    '(progn
+       (evil-make-overriding-map ggtags-mode-map 'normal)
+       ;; force update evil keymaps after ggtags-mode loaded
+       (add-hook 'ggtags-mode-hook #'evil-normalize-keymaps)))
+  )
+(use-package helm-gtags
+  :ensure t)
 
 ;; Complete Anything
 (use-package company
@@ -98,21 +119,30 @@
   :diminish company-mode
   :config
   (global-company-mode)
-  (setq company-backends nil))
+  (setq company-backends nil)
+  (add-to-list 'company-backends 'company-elisp))
 (use-package helm-company
   :ensure t)
 
-;; Set up for C and C++ languages
-(require 'setup-c-cpp)
-
-;; Set up git
-(require 'setup-git)
 
 (use-package projectile
   :ensure t
   :config
   (projectile-global-mode)
-  (setq projectile-enable-caching t))
+  (setq projectile-enable-caching t)
+  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
+
+;; Set up for C and C++ languages
+(require 'setup-c-cpp)
+
+;; Set up for python
+(require 'setup-python)
+
+;; Set up git
+(require 'setup-git)
+
+(use-package ess
+  :ensure t)
 
 (use-package helm-projectile
   :ensure t
@@ -121,12 +151,37 @@
   (setq projectile-completion-system 'helm)
   (setq projectile-indexing-method 'alien))
 
+(use-package hydra
+  :ensure t)
+
+
+(require 'setup-movement)
+
 ;; use ssh config in tramnp
 (require 'tramp)
 (tramp-set-completion-function "ssh"
                                '((tramp-parse-sconfig "/etc/ssh_config")
                                  (tramp-parse-sconfig "~/.ssh/config")))
 
+(require 'setup-org)
+
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :commands lsp
+;;   )
+
+;; (use-package company-lsp
+;;   :ensure t
+;;   :commands company-lsp
+;;   )
+;; (use-package ccls
+;;   :ensure t
+;;   :config
+;;   (setq ccls-executable "ccls.sh")
+;;   (setq ccls-initialization-options '(:compilationDatabaseDirectory "/home/nmeyer/repos/av/.build.release.gnu/"))
+;;   (add-hook 'c++-mode-hook (lambda ()
+;;                             (lsp)))
+;;   )
 
 ;; customization
 (setq custom-file "~/.emacs.d/customization.el")
@@ -150,14 +205,14 @@
 (defun njm/increase-font-size ()
   (interactive)
   (njm/set-font-size
-   (+ (face-attribute 'default (selected-frame) :height) 10)
+   (+ (face-attribute 'default :height) 5)
    (selected-frame))
   )
 
 (defun njm/decrease-font-size ()
   (interactive)
   (njm/set-font-size
-   (- (face-attribute 'default (selected-frame) :height) 10)
+   (- (face-attribute 'default :height) 5)
    (selected-frame))
   )
 
@@ -189,11 +244,15 @@
 
 (setq compilation-scroll-output t)
 
-(use-package groovy-mode
-  :ensure t)
+;; (use-package groovy-mode
+;;   :ensure t)
 
 ;; customization for current machine
 (if (file-exists-p "~/.emacs.d/machineCustom.el")
     (load "~/.emacs.d/machineCustom.el")
   )
 (put 'downcase-region 'disabled nil)
+
+(njm/set-font-size 95)
+(put 'dired-find-alternate-file 'disabled nil)
+(put 'magit-clean 'disabled nil)

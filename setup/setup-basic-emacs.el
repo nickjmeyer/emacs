@@ -13,11 +13,22 @@
 (prefer-coding-system 'utf-8)
 
 ;; Cleanup interface
-(scroll-bar-mode -1)
+(if (display-graphic-p)
+    (scroll-bar-mode -1))
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (blink-cursor-mode)
-(setq column-number-mode t)
+;;(setq column-number-mode t)
+
+;; Turn off scroll bar for each graphical frame
+(defun njm/turn-off-scroll-bar (frame)
+  (if (display-graphic-p frame)
+      (scroll-bar-mode -1)))
+(add-hook 'after-make-frame-functions 'njm/turn-off-scroll-bar)
+
+
+;; Turn on auto-revert mode for dired
+(add-hook 'dired-mode-hook (lambda() (auto-revert-mode)))
 
 ;; Kill ring stuff
 (setq global-mark-ring-max 5000) ;; increase mark ring to contains 5000 entries
@@ -32,7 +43,10 @@
 (use-package exec-path-from-shell
   :ensure t
   :config
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+  (exec-path-from-shell-copy-env "PYTHONPATH"))
 
 (setq inhibit-startup-message t)
 
@@ -55,3 +69,14 @@
 
 ;; Prevent accidental closes of emacs
 (setq confirm-kill-emacs 'y-or-n-p)
+
+;; Get path on remote machine when using tramp
+;; use ssh config in tramnp
+(require 'tramp)
+(tramp-set-completion-function "ssh"
+                               '((tramp-parse-sconfig "/etc/ssh_config")
+                                 (tramp-parse-sconfig "~/.ssh/config")))
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+;; Get rid of the question marks in the line count.
+(setq line-number-display-limit-width 2000000)
