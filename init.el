@@ -244,6 +244,10 @@
 
 (setq compilation-scroll-output t)
 
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil))
+
 ;; (use-package groovy-mode
 ;;   :ensure t)
 
