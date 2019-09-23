@@ -8,6 +8,6 @@
 ;;   :ensure t
 ;;   :requires (ox-reveal cl))
 
-(require 'org-tempo)
+;; (require 'org-tempo)
 
 (provide 'setup-org)

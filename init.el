@@ -1,9 +1,9 @@
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/"))
+             '("org" . "https://orgmode.org/elpa/"))
 (package-initialize)
 (package-refresh-contents)
 
@@ -12,13 +12,13 @@
 
 (add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
 (add-to-list 'load-path "~/.emacs.d/setup")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
+
+
+(use-package gnu-elpa-keyring-update
+  :ensure t)
 
 (require 'setup-basic-emacs)
-
-;; (use-package exwm
-;;   :config
-;;   (exwm-enable)
-;;   (require 'setup-exwm))
 
 ;; Better undo
 (use-package undo-tree
@@ -34,13 +34,15 @@
 (use-package cl
   :ensure t)
 
-;; Make mode line more appealing
-(use-package powerline-evil
-  :ensure t)
-(use-package powerline
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode)
+      :config (setq doom-modeline-height 15)
+)
+
+(use-package doom-themes
   :ensure t
-  :config
-  (powerline-evil-vim-theme))
+  :config (load-theme 'doom-molokai t))
 
 (use-package flycheck
   :ensure t)
@@ -70,11 +72,32 @@
 ;;   :config
 ;;   (global-aggressive-indent-mode 1))
 
+;; Helm is a necessity
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :config
+  (require 'setup-helm))
+
+(use-package helm-ag
+  :ensure t)
+
 ;; Evil mode because my pinky gets tired...
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :custom
+  (evil-collection-setup-minibuffer t)
+  :config
+  (evil-collection-init))
 
 (use-package evil-mc
   :ensure t
@@ -93,26 +116,6 @@
 (setq tetris-score-file "~/.emacs-games/tetris-scores")
 (setq snake-score-file "~/.emacs-games/snake-scores")
 
-;; Helm is a necessity
-(use-package helm
-  :ensure t
-  :diminish helm-mode
-  :config
-  (require 'setup-helm))
-
-(use-package ggtags
-  :ensure t
-  :config
-  ;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-  (eval-after-load 'ggtags
-    '(progn
-       (evil-make-overriding-map ggtags-mode-map 'normal)
-       ;; force update evil keymaps after ggtags-mode loaded
-       (add-hook 'ggtags-mode-hook #'evil-normalize-keymaps)))
-  )
-(use-package helm-gtags
-  :ensure t)
-
 ;; Complete Anything
 (use-package company
   :ensure t
@@ -124,13 +127,13 @@
 (use-package helm-company
   :ensure t)
 
-
 (use-package projectile
   :ensure t
   :config
   (projectile-global-mode)
   (setq projectile-enable-caching t)
-  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
+  (setq projectile-project-compilation-cmd ""))
 
 ;; Set up for C and C++ languages
 (require 'setup-c-cpp)
@@ -148,10 +151,12 @@
   :ensure t
   :config
   (helm-projectile-on)
-  (setq projectile-completion-system 'helm)
-  (setq projectile-indexing-method 'alien))
+  (setq projectile-completion-system 'helm))
 
 (use-package hydra
+  :ensure t)
+
+(use-package docker-tramp
   :ensure t)
 
 
@@ -166,22 +171,25 @@
 (require 'setup-org)
 
 ;; (use-package lsp-mode
-;;   :ensure t
-;;   :commands lsp
-;;   )
+;;  :ensure t
+;;  :commands lsp
+;;  )
 
 ;; (use-package company-lsp
-;;   :ensure t
-;;   :commands company-lsp
-;;   )
+;;  :ensure t
+;;  :commands company-lsp
+;;  )
 ;; (use-package ccls
-;;   :ensure t
-;;   :config
-;;   (setq ccls-executable "ccls.sh")
-;;   (setq ccls-initialization-options '(:compilationDatabaseDirectory "/home/nmeyer/repos/av/.build.release.gnu/"))
-;;   (add-hook 'c++-mode-hook (lambda ()
-;;                             (lsp)))
-;;   )
+;;  :ensure t
+;;  :config
+;;  (setq ccls-executable ccls)
+;;  (setq ccls-initialization-options '(:compilationDatabaseDirectory "/home/nmeyer/repos/av/.build.release.gnu/"))
+;;  (add-hook 'c++-mode-hook (lambda ()
+;;                            (lsp)))
+;;  )
+
+(use-package rust-mode
+  :ensure t)
 
 ;; customization
 (setq custom-file "~/.emacs.d/customization.el")
@@ -230,27 +238,29 @@
   (message "External setup complete")
   )
 
-
-
 (require 'ansi-color)
 (defun endless/colorize-compilation ()
   "Colorize from `compilation-filter-start' to `point'."
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region
-     compilation-filter-start (point))))
+     compilation-filter-start (point-max))))
 
 (add-hook 'compilation-filter-hook
           #'endless/colorize-compilation)
 
+;; (defun colorize-entire-compilation (buffer desc)
+;;   "Colorize from `compilation-filter-start' to `point'."
+;;   (let ((inhibit-read-only t))
+;;     (ansi-color-apply-on-region (point-min) (point-max))))
+
+;; (add-hook 'compilation-finish-functions
+;;           #'colorize-entire-compilation)
+
 (setq compilation-scroll-output t)
 
-;; (use-package groovy-mode
-;;   :ensure t)
+(use-package groovy-mode
+  :ensure t)
 
-;; customization for current machine
-(if (file-exists-p "~/.emacs.d/machineCustom.el")
-    (load "~/.emacs.d/machineCustom.el")
-  )
 (put 'downcase-region 'disabled nil)
 
 (njm/set-font-size 95)
