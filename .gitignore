@@ -2,6 +2,8 @@ machineCustom.el
 
 irony/
 
+transient/
+
 projectile.cache
 
 install-rtags.sh
