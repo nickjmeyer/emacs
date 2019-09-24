@@ -248,6 +248,25 @@
 (add-hook 'compilation-filter-hook
           #'endless/colorize-compilation)
 
+
+(defun njm/kill-file-path ()
+  "Copy file path to kill ring."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name)
+                    )
+                  )
+        )
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename)
+      )
+    )
+  )
+(global-set-key (kbd "C-c f") #'njm/kill-file-path)
+
+
 ;; (defun colorize-entire-compilation (buffer desc)
 ;;   "Colorize from `compilation-filter-start' to `point'."
 ;;   (let ((inhibit-read-only t))
