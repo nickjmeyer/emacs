@@ -10,7 +10,7 @@
 (unless (package-installed-p 'use-package)
       (package-install 'use-package))
 
-(add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
+;; (add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
 (add-to-list 'load-path "~/.emacs.d/setup")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
 
@@ -60,6 +60,15 @@
 (use-package flycheck-yamllint
   :ensure t)
 
+(use-package bazel-mode
+  :ensure t
+  :config
+  (setq auto-mode-alist
+        (append
+         '(("BUILD\\'" . bazel-mode))
+         auto-mode-alist))
+  )
+
 ;; Formatting stuff
 (setq mode-require-final-newline t)      ;; add a newline to end of file
 (setq-default tab-width 2) ;; default to 2 visible spaces to display a tab
@@ -72,15 +81,8 @@
 ;;   :config
 ;;   (global-aggressive-indent-mode 1))
 
-;; Helm is a necessity
-(use-package helm
-  :ensure t
-  :diminish helm-mode
-  :config
-  (require 'setup-helm))
-
-(use-package helm-ag
-  :ensure t)
+;; Trying out Ivy
+(require 'setup-ivy)
 
 ;; Evil mode because my pinky gets tired...
 (use-package evil
@@ -97,7 +99,10 @@
   :custom
   (evil-collection-setup-minibuffer t)
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  (require 'evil-collection-ivy))
+
+
 
 (use-package evil-mc
   :ensure t
@@ -124,8 +129,6 @@
   (global-company-mode)
   (setq company-backends nil)
   (add-to-list 'company-backends 'company-elisp))
-(use-package helm-company
-  :ensure t)
 
 (use-package projectile
   :ensure t
@@ -147,11 +150,10 @@
 (use-package ess
   :ensure t)
 
-(use-package helm-projectile
+(use-package counsel-projectile
   :ensure t
   :config
-  (helm-projectile-on)
-  (setq projectile-completion-system 'helm))
+  (counsel-projectile-mode))
 
 (use-package hydra
   :ensure t)

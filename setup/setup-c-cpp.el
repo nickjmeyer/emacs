@@ -55,8 +55,6 @@
              (add-hook 'cmake-mode-hook (lambda () (setq indent-tabs-mode nil)))
              )
 
-
-
 (require 'cc-mode)
 
 ;; Generic doxygen formatting
