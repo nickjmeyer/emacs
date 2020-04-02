@@ -159,10 +159,19 @@
 (use-package ess
   :ensure t)
 
+(defun counsel-projectile-ag-noaffinity (orig-fun &rest options)
+  (interactive)
+  (message "called with args %s" options)
+  (apply orig-fun (push "--noaffinity" options))
+  )
+
 (use-package counsel-projectile
   :ensure t
   :config
-  (counsel-projectile-mode))
+  (counsel-projectile-mode)
+  (advice-add 'counsel-projectile-ag :around #'counsel-projectile-ag-noaffinity)
+  )
+
 
 (use-package hydra
   :ensure t)
