@@ -59,8 +59,7 @@
 (setq-default abbrev-mode nil)
 
 ;; Fix garbage collection
-(setq gc-cons-threshold 100000000)
-(setq gc-cons-threshold (eval-when-compile (* 1024 1024 1024)))
+(setq gc-cons-threshold (eval-when-compile (* 256 1024 1024)))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 
 ;; Fix for max osx

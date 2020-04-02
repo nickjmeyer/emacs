@@ -18,6 +18,15 @@
   ("<return>" nil "exit")
   )
 
+(defhydra hydra-change-desktop (global-map "C-x n")
+  "move-window"
+  ("c" eyebrowse-create-window-config "create")
+  ("x" eyebrowse-close-window-config "close")
+  ("l" eyebrowse-next-window-config "next")
+  ("h" eyebrowse-prev-window-config "prev")
+  ("<return>" nil "exit")
+  )
+
 ;; For EXWM.  Figure out later how to fix this.
 ;; A hydra to improve window navigation.  Acts as a mini evil mode like thing.
 ;; (defhydra hydra-move-window (:pre (setq exwm-input-line-mode-passthrough t)

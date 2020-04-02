@@ -4,6 +4,7 @@
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "https://orgmode.org/elpa/"))
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (package-initialize)
 (package-refresh-contents)
 
@@ -136,6 +137,7 @@
   (projectile-global-mode)
   (setq projectile-enable-caching t)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
+  (setq projectile-indexing-method 'alien)
   (setq projectile-project-compilation-cmd ""))
 
 ;; Set up for C and C++ languages
@@ -161,6 +163,12 @@
 (use-package docker-tramp
   :ensure t)
 
+(use-package eyebrowse
+  :ensure t
+  :config
+  (eyebrowse-mode)
+  (setq eyebrowse-new-workspace t)
+   )
 
 (require 'setup-movement)
 
@@ -172,23 +180,22 @@
 
 (require 'setup-org)
 
-;; (use-package lsp-mode
-;;  :ensure t
-;;  :commands lsp
-;;  )
+;; (use-package spinner
+;;   :ensure t)
 
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :hook (c++-mode . lsp)
+;;   :commands lsp)
+
+;; ;; optionally
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :commands lsp-ui-mode)
 ;; (use-package company-lsp
-;;  :ensure t
-;;  :commands company-lsp
-;;  )
-;; (use-package ccls
-;;  :ensure t
-;;  :config
-;;  (setq ccls-executable ccls)
-;;  (setq ccls-initialization-options '(:compilationDatabaseDirectory "/home/nmeyer/repos/av/.build.release.gnu/"))
-;;  (add-hook 'c++-mode-hook (lambda ()
-;;                            (lsp)))
-;;  )
+;;   :ensure t
+;;   :commands company-lsp)
+
 
 (use-package rust-mode
   :ensure t)
