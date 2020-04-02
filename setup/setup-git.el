@@ -17,7 +17,7 @@
   (message "disabling escape!")
   ;; Unbind the magit-mode-burry-buffer function
   (define-key magit-mode-map (kbd "<escape>") nil)
-  (setq vc-handled-backends nil)
+  (setq magit-completing-read-function 'ivy-completing-read)
   )
 
 (use-package evil-magit

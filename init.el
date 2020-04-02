@@ -1,4 +1,5 @@
 (require 'package)
+(setq package-signature-check nil)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -61,6 +62,10 @@
 (use-package flycheck-yamllint
   :ensure t)
 
+(use-package markdown-mode
+  :ensure t
+)
+
 (use-package bazel-mode
   :ensure t
   :config
@@ -69,6 +74,8 @@
          '(("BUILD\\'" . bazel-mode))
          auto-mode-alist))
   )
+
+(add-to-list 'auto-mode-alist '("\\.asl\\'" . python-mode))
 
 ;; Formatting stuff
 (setq mode-require-final-newline t)      ;; add a newline to end of file
@@ -99,7 +106,7 @@
   :ensure t
   :custom
   (evil-collection-setup-minibuffer t)
-  :config
+  :init
   (evil-collection-init)
   (require 'evil-collection-ivy))
 
@@ -137,7 +144,7 @@
   (projectile-global-mode)
   (setq projectile-enable-caching t)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
-  (setq projectile-indexing-method 'alien)
+  (setq projectile-completion-system 'ivy)
   (setq projectile-project-compilation-cmd ""))
 
 ;; Set up for C and C++ languages

@@ -1,8 +1,15 @@
 (use-package ivy
-  :ensure t)
+  :ensure t
+  :config
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-plus)
+          (t . ivy--regex-ignore-order)))
+  )
 (use-package counsel
   :ensure t)
 (use-package swiper
+  :ensure t)
+(use-package flx
   :ensure t)
 
 (setq ivy-use-virtual-buffers t)
