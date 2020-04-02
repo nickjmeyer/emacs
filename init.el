@@ -5,7 +5,6 @@
              '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
              '("org" . "https://orgmode.org/elpa/"))
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (package-initialize)
 (package-refresh-contents)
 
