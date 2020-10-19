@@ -155,6 +155,11 @@
 ;; Set up git
 (require 'setup-git)
 
+(use-package transient
+  :ensure t)
+
+(require 'setup-argo)
+
 (use-package ess
   :ensure t)
 
@@ -300,6 +305,11 @@
 ;;           #'colorize-entire-compilation)
 
 (setq compilation-scroll-output t)
+
+(defun plain-pipe-for-process () (progn
+                                   (setq-local process-connection-type nil)
+                                   (setq-local tramp-process-connection-type nil)))
+(add-hook 'compilation-mode-hook 'plain-pipe-for-process)
 
 (use-package groovy-mode
   :ensure t)

@@ -36,5 +36,11 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+(custom-set-faces
+ '(ivy-current-match
+   ((((class color) (background light))
+     :background "blue" :foreground "white")
+    (((class color) (background dark))
+     :background "blue" :foreground "black"))))
 
 (provide 'setup-ivy)
