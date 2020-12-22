@@ -158,8 +158,6 @@
 (use-package transient
   :ensure t)
 
-(require 'setup-argo)
-
 (use-package ess
   :ensure t)
 
