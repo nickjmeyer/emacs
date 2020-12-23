@@ -50,10 +50,6 @@
 (use-package json-mode
   :ensure t)
 
-(use-package flycheck-demjsonlint
-  :ensure t
-  :pin melpa)
-
 (use-package yaml-mode
   :ensure t)
 
