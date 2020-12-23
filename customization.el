@@ -8,7 +8,8 @@
  '(ivy-count-format "(%d/%d) ")
  '(ivy-mode t)
  '(ivy-use-virtual-buffers t)
- )
+ '(package-selected-packages
+   '(cl yaml-mode use-package undo-tree rust-mode python-docstring multi-term modern-cpp-font-lock markdown-mode json-mode hydra groovy-mode gnu-elpa-keyring-update git-gutter-fringe flycheck-yamllint flx eyebrowse exec-path-from-shell evil-mc evil-magit evil-collection ess doom-themes doom-modeline docker-tramp diminish counsel-projectile company cmake-mode bazel-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
