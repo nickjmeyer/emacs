@@ -11,7 +11,6 @@
 (unless (package-installed-p 'use-package)
       (package-install 'use-package))
 
-;; (add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
 (add-to-list 'load-path "~/.emacs.d/setup")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
 
