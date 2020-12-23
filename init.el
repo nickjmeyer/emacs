@@ -31,7 +31,7 @@
 (use-package diminish
   :ensure t)
 
-(use-package cl
+(use-package cl-lib
   :ensure t)
 
 (use-package doom-modeline
