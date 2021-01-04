@@ -14,10 +14,11 @@
                                   ) auto-mode-alist))
   (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
   :config
-  (message "disabling escape!")
   ;; Unbind the magit-mode-burry-buffer function
   (define-key magit-mode-map (kbd "<escape>") nil)
   (setq magit-completing-read-function 'ivy-completing-read)
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-remote-branches)
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
   )
 
 (use-package evil-magit

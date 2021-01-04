@@ -26,7 +26,8 @@
   :ensure t
   :diminish undo-tree-mode
   :init
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+  (evil-set-undo-system 'undo-tree))
 
 ;; Trim down the mode line
 (use-package diminish
