@@ -11,7 +11,6 @@
 (unless (package-installed-p 'use-package)
       (package-install 'use-package))
 
-;; (add-to-list 'load-path "~/.emacs.d/cc-mode-5.33")
 (add-to-list 'load-path "~/.emacs.d/setup")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
 
@@ -33,7 +32,7 @@
 (use-package diminish
   :ensure t)
 
-(use-package cl
+(use-package cl-lib
   :ensure t)
 
 (use-package doom-modeline
@@ -51,10 +50,6 @@
 
 (use-package json-mode
   :ensure t)
-
-(use-package flycheck-demjsonlint
-  :ensure t
-  :pin melpa)
 
 (use-package yaml-mode
   :ensure t)
@@ -158,8 +153,6 @@
 
 (use-package transient
   :ensure t)
-
-(require 'setup-argo)
 
 (use-package ess
   :ensure t)
