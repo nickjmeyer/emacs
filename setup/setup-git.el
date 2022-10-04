@@ -21,13 +21,13 @@
   (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
   )
 
-(use-package evil-magit
-  :ensure t
-  :config
-  (message "disabling escape in evil!")
-  ;; Unbind the magit-mode-burry-buffer function
-  (define-key magit-mode-map (kbd "<normal-state> <escape>") nil)
-  (setq magit-refresh-status-buffer nil))
+;; (use-package evil-magit
+;;   :ensure t
+;;   :config
+;;   (message "disabling escape in evil!")
+;;   ;; Unbind the magit-mode-burry-buffer function
+;;   (define-key magit-mode-map (kbd "<normal-state> <escape>") nil)
+;;   (setq magit-refresh-status-buffer nil))
 
 (use-package git-gutter-fringe
   :ensure

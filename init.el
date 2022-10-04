@@ -20,13 +20,36 @@
 
 (require 'setup-basic-emacs)
 
+;; Evil mode because my pinky gets tired...
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :custom
+  (evil-collection-setup-minibuffer t)
+  :init
+  (evil-collection-init))
+
+;; (use-package evil-mc
+;;   :ensure t
+;;   :config
+;;   (global-evil-mc-mode 1))
+
 ;; Better undo
 (use-package undo-tree
   :ensure t
   :diminish undo-tree-mode
   :init
   (global-undo-tree-mode 1)
-  (evil-set-undo-system 'undo-tree))
+  (evil-set-undo-system 'undo-tree)
+  (setq undo-tree-auto-save-history nil))
 
 ;; Trim down the mode line
 (use-package diminish
@@ -61,16 +84,14 @@
   :ensure t
 )
 
-(use-package bazel-mode
+(use-package bazel
   :ensure t
-  :config
-  (setq auto-mode-alist
-        (append
-         '(("BUILD\\'" . bazel-mode))
-         auto-mode-alist))
+  ;; :config
+  ;; (setq auto-mode-alist
+  ;;       (append
+  ;;        '(("BUILD\\'" . bazel-mode))
+  ;;        auto-mode-alist))
   )
-
-(add-to-list 'auto-mode-alist '("\\.asl\\'" . python-mode))
 
 ;; Formatting stuff
 (setq mode-require-final-newline t)      ;; add a newline to end of file
@@ -87,42 +108,11 @@
 ;; Trying out Ivy
 (require 'setup-ivy)
 
-;; Evil mode because my pinky gets tired...
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :custom
-  (evil-collection-setup-minibuffer t)
-  :init
-  (evil-collection-init)
-  (require 'evil-collection-ivy))
-
-
-
-(use-package evil-mc
-  :ensure t
-  :config
-  (global-evil-mc-mode 1))
-
 (use-package multi-term
   :ensure t
   :config
   (setq multi-term-program "/bin/bash")
   (global-set-key (kbd "C-x t") #'multi-term-dedicated-toggle))
-
-;; Games are fun...
-(unless (file-exists-p "~/.emacs-games")
-  (make-directory "~/.emacs-games"))
-(setq tetris-score-file "~/.emacs-games/tetris-scores")
-(setq snake-score-file "~/.emacs-games/snake-scores")
 
 ;; Complete Anything
 (use-package company
@@ -145,16 +135,10 @@
 ;; Set up for C and C++ languages
 (require 'setup-c-cpp)
 
-;; Set up for python
-(require 'setup-python)
-
 ;; Set up git
 (require 'setup-git)
 
 (use-package transient
-  :ensure t)
-
-(use-package ess
   :ensure t)
 
 (defun counsel-projectile-ag-noaffinity (orig-fun &rest options)
@@ -191,25 +175,6 @@
 (tramp-set-completion-function "ssh"
                                '((tramp-parse-sconfig "/etc/ssh_config")
                                  (tramp-parse-sconfig "~/.ssh/config")))
-
-(require 'setup-org)
-
-;; (use-package spinner
-;;   :ensure t)
-
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :hook (c++-mode . lsp)
-;;   :commands lsp)
-
-;; ;; optionally
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :commands lsp-ui-mode)
-;; (use-package company-lsp
-;;   :ensure t
-;;   :commands company-lsp)
-
 
 (use-package rust-mode
   :ensure t)
