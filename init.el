@@ -84,6 +84,9 @@
   :ensure t
 )
 
+(use-package adoc-mode
+  :ensure t)
+
 (use-package bazel
   :ensure t
   ;; :config
@@ -128,6 +131,7 @@
   :config
   (projectile-global-mode)
   (setq projectile-enable-caching t)
+  (setq compilation-read-command t)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-compilation-cmd ""))
@@ -175,6 +179,8 @@
 (tramp-set-completion-function "ssh"
                                '((tramp-parse-sconfig "/etc/ssh_config")
                                  (tramp-parse-sconfig "~/.ssh/config")))
+(setq debug-ignored-errors
+      (cons 'remote-file-error debug-ignored-errors))
 
 (use-package rust-mode
   :ensure t)
@@ -265,10 +271,10 @@
 
 (setq compilation-scroll-output t)
 
-(defun plain-pipe-for-process () (progn
-                                   (setq-local process-connection-type nil)
-                                   (setq-local tramp-process-connection-type nil)))
-(add-hook 'compilation-mode-hook 'plain-pipe-for-process)
+;; (defun plain-pipe-for-process () (progn
+;;                                    (setq-local process-connection-type nil)
+;;                                    (setq-local tramp-process-connection-type nil)))
+;; (add-hook 'compilation-mode-hook 'plain-pipe-for-process)
 
 (use-package groovy-mode
   :ensure t)

@@ -17,8 +17,8 @@
   ;; Unbind the magit-mode-burry-buffer function
   (define-key magit-mode-map (kbd "<escape>") nil)
   (setq magit-completing-read-function 'ivy-completing-read)
-  (remove-hook 'magit-refs-sections-hook 'magit-insert-remote-branches)
-  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
+  ;; (remove-hook 'magit-refs-sections-hook 'magit-insert-remote-branches)
+  ;; (remove-hook 'magit-refs-sections-hook 'magit-insert-tags)
   )
 
 ;; (use-package evil-magit
@@ -29,9 +29,9 @@
 ;;   (define-key magit-mode-map (kbd "<normal-state> <escape>") nil)
 ;;   (setq magit-refresh-status-buffer nil))
 
-(use-package git-gutter-fringe
-  :ensure
-  :diminish git-gutter-mode
-  :config
-  (global-git-gutter-mode 1)
-  (setq git-gutter-fr:side 'right-fringe))
+;; (use-package git-gutter-fringe
+;;   :ensure
+;;   :diminish git-gutter-mode
+;;   :config
+;;   (global-git-gutter-mode 1)
+;;   (setq git-gutter-fr:side 'right-fringe))

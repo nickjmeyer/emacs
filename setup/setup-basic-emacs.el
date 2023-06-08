@@ -27,8 +27,10 @@
 (add-hook 'after-make-frame-functions 'njm/turn-off-scroll-bar)
 
 
-;; Turn on auto-revert mode for dired
+;; Auto revert modes
+(global-auto-revert-mode)
 (add-hook 'dired-mode-hook (lambda() (auto-revert-mode)))
+(setq auto-revert-remote-files t)
 
 ;; Kill ring stuff
 (setq global-mark-ring-max 5000) ;; increase mark ring to contains 5000 entries
