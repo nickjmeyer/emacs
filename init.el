@@ -162,9 +162,6 @@
 (use-package hydra
   :ensure t)
 
-(use-package docker-tramp
-  :ensure t)
-
 (use-package eyebrowse
   :ensure t
   :config
