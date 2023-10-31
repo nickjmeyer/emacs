@@ -63,7 +63,7 @@
       :hook (after-init . doom-modeline-mode)
       :config
       (setq doom-modeline-height 15)
-      (nerd-icons-install-fonts t)
+      (setq doom-modeline-icon nil)
 )
 
 (use-package doom-themes
