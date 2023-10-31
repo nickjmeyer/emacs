@@ -58,3 +58,5 @@ ede-projects.el
 .python-environments/
 abbrev_defs
 semanticdb/
+
+network-security.data
