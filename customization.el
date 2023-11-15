@@ -15,6 +15,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "gray12" :foreground "#dfdfdf" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 100 :width normal))))
- '(ivy-current-match ((((class color) (background light)) :background "blue" :foreground "white") (((class color) (background dark)) :background "blue" :foreground "black")))
+ '(custom-state ((t (:background "#b6e63e" :foreground "color-16"))))
+ '(ivy-current-match ((t (:extend t :background "blue" :foreground "white"))))
  '(magit-diff-added ((t (:extend t :background "color-22"))))
  '(magit-diff-added-highlight ((t (:extend t :background "color-22" :foreground "#9ac334" :weight bold)))))
