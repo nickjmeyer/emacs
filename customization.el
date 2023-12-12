@@ -18,4 +18,5 @@
  '(custom-state ((t (:background "#b6e63e" :foreground "color-16"))))
  '(ivy-current-match ((t (:extend t :background "blue" :foreground "white"))))
  '(magit-diff-added ((t (:extend t :background "color-22"))))
- '(magit-diff-added-highlight ((t (:extend t :background "color-22" :foreground "#9ac334" :weight bold)))))
+ '(magit-diff-added-highlight ((t (:extend t :background "color-22" :foreground "#9ac334" :weight bold))))
+ '(smerge-lower ((t (:extend t :background "color-28")))))
