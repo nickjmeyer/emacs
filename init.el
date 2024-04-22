@@ -20,6 +20,12 @@
 
 (require 'setup-basic-emacs)
 
+
+(use-package lua-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode)))
+
 ;; Evil mode because my pinky gets tired...
 (use-package evil
   :ensure t
