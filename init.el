@@ -97,11 +97,11 @@
 
 (use-package bazel
   :ensure t
-  ;; :config
-  ;; (setq auto-mode-alist
-  ;;       (append
-  ;;        '(("BUILD\\'" . bazel-mode))
-  ;;        auto-mode-alist))
+  :config
+  (setq auto-mode-alist
+        (append
+         '(("BUILD\\'" . bazel-mode))
+         auto-mode-alist))
   )
 
 ;; Formatting stuff
