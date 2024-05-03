@@ -15,8 +15,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
 
 
-(use-package gnu-elpa-keyring-update
-  :ensure t)
+;; No idea if we should keep this or not.
+;; (use-package gnu-elpa-keyring-update
+;;   :ensure t)
 
 (require 'setup-basic-emacs)
 
