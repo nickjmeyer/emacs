@@ -96,6 +96,9 @@
 (use-package adoc-mode
   :ensure t)
 
+(use-package protobuf-mode
+  :ensure t)
+
 (use-package bazel
   :ensure t
   :config
