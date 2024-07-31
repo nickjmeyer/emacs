@@ -104,7 +104,7 @@
   :config
   (setq auto-mode-alist
         (append
-         '(("BUILD\\'" . bazel-mode))
+         '(("BUILD.*\\'" . bazel-mode))
          auto-mode-alist))
   )
 
