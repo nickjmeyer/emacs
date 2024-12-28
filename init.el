@@ -31,6 +31,11 @@
   :config
   (evil-mode 1))
 
+(use-package evil-mc
+  :ensure t
+  :config
+  (global-evil-mc-mode 1))
+
 (use-package evil-collection
   :after evil
   :ensure t
@@ -38,11 +43,6 @@
   (evil-collection-setup-minibuffer t)
   :init
   (evil-collection-init))
-
-;; (use-package evil-mc
-;;   :ensure t
-;;   :config
-;;   (global-evil-mc-mode 1))
 
 ;; Better undo
 (use-package undo-tree
@@ -128,7 +128,6 @@
 
 (use-package transient
   :ensure t)
-
 
 (require 'setup-movement)
 
