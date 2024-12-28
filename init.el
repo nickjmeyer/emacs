@@ -168,15 +168,6 @@
   )
 
 
-(use-package hydra
-  :ensure t)
-
-(use-package eyebrowse
-  :ensure t
-  :config
-  (eyebrowse-mode)
-  (setq eyebrowse-new-workspace t)
-   )
 
 (require 'setup-movement)
 
