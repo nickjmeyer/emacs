@@ -1,7 +1,5 @@
 (provide 'setup-git)
 
-(setq auto-mode-alist (append '(("COMMIT_EDITMSG$" . text-mode)
-                                ) auto-mode-alist))
 
 (use-package magit
   :ensure t
