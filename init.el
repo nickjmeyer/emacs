@@ -110,6 +110,9 @@
 ;; Trying out Ivy
 (require 'setup-ivy)
 
+(use-package rg
+  :ensure t)
+
 (use-package projectile
   :ensure t
   :config
