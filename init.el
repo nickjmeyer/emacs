@@ -6,18 +6,16 @@
 (package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
-      (package-install 'use-package))
+  (package-install 'use-package))
 
 (add-to-list 'load-path "~/.emacs.d/setup")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/steup")
-
 
 ;; No idea if we should keep this or not.
 ;; (use-package gnu-elpa-keyring-update
 ;;   :ensure t)
 
 (require 'setup-basic-emacs)
-
 
 (use-package lua-mode
   :ensure t
@@ -85,7 +83,7 @@
 
 (use-package markdown-mode
   :ensure t
-)
+  )
 
 (use-package adoc-mode
   :ensure t)
