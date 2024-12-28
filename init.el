@@ -59,16 +59,13 @@
 (use-package diminish
   :ensure t)
 
-(use-package cl-lib
-  :ensure t)
-
 (use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-mode)
-      :config
-      (setq doom-modeline-height 15)
-      (setq doom-modeline-icon nil)
-)
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-height 15)
+  (setq doom-modeline-icon nil)
+  )
 
 (use-package doom-themes
   :ensure t
@@ -111,29 +108,9 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
-;; (use-package aggressive-indent
-;;   :ensure t
-;;   :diminish aggressive-indent-mode
-;;   :config
-;;   (global-aggressive-indent-mode 1))
 
 ;; Trying out Ivy
 (require 'setup-ivy)
-
-(use-package multi-term
-  :ensure t
-  :config
-  (setq multi-term-program "/bin/bash")
-  (global-set-key (kbd "C-x t") #'multi-term-dedicated-toggle))
-
-;; Complete Anything
-(use-package company
-  :ensure t
-  :diminish company-mode
-  :config
-  (global-company-mode)
-  (setq company-backends nil)
-  (add-to-list 'company-backends 'company-elisp))
 
 (use-package projectile
   :ensure t
@@ -154,33 +131,8 @@
 (use-package transient
   :ensure t)
 
-(defun counsel-projectile-ag-noaffinity (orig-fun &rest options)
-  (interactive)
-  (message "called with args %s" options)
-  (apply orig-fun (push "--noaffinity" options))
-  )
-
-(use-package counsel-projectile
-  :ensure t
-  :config
-  (counsel-projectile-mode)
-  (advice-add 'counsel-projectile-ag :around #'counsel-projectile-ag-noaffinity)
-  )
-
-
 
 (require 'setup-movement)
-
-;; use ssh config in tramnp
-(require 'tramp)
-(tramp-set-completion-function "ssh"
-                               '((tramp-parse-sconfig "/etc/ssh_config")
-                                 (tramp-parse-sconfig "~/.ssh/config")))
-(setq debug-ignored-errors
-      (cons 'remote-file-error debug-ignored-errors))
-
-(use-package rust-mode
-  :ensure t)
 
 ;; customization
 (setq custom-file "~/.emacs.d/customization.el")
@@ -215,20 +167,6 @@
    (selected-frame))
   )
 
-(defun njm/laptop-setup ()
-  (interactive)
-  (message "Begin setup for laptop")
-  (njm/set-font-size 120 (selected-frame))
-  (message "Laptop setup complete")
-  )
-
-(defun njm/external-setup ()
-  (interactive)
-  (message "Begin setup for external")
-  (njm/set-font-size 160 (selected-frame))
-  (message "External setup complete")
-  )
-
 (require 'ansi-color)
 (defun endless/colorize-compilation ()
   "Colorize from `compilation-filter-start' to `point'."
@@ -257,24 +195,7 @@
   )
 (global-set-key (kbd "C-c f") #'njm/kill-file-path)
 
-
-;; (defun colorize-entire-compilation (buffer desc)
-;;   "Colorize from `compilation-filter-start' to `point'."
-;;   (let ((inhibit-read-only t))
-;;     (ansi-color-apply-on-region (point-min) (point-max))))
-
-;; (add-hook 'compilation-finish-functions
-;;           #'colorize-entire-compilation)
-
 (setq compilation-scroll-output t)
-
-;; (defun plain-pipe-for-process () (progn
-;;                                    (setq-local process-connection-type nil)
-;;                                    (setq-local tramp-process-connection-type nil)))
-;; (add-hook 'compilation-mode-hook 'plain-pipe-for-process)
-
-(use-package groovy-mode
-  :ensure t)
 
 (put 'downcase-region 'disabled nil)
 
