@@ -8,7 +8,9 @@
  '(ivy-count-format "(%d/%d) ")
  '(ivy-mode t)
  '(ivy-use-virtual-buffers t)
- '(package-selected-packages nil))
+ '(package-selected-packages nil)
+ '(warning-suppress-log-types '((comp)))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
